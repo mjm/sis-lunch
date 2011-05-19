@@ -1,0 +1,5 @@
+<%= form_for place, :remote => true do |f| -%>
+	<%= f.text_field :name %><br/>
+	<%= f.check_box :walkable %> Walking distance?<br/>
+	<%= f.submit "Add" %>
+<% end %>

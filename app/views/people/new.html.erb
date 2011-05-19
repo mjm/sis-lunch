@@ -1,0 +1,16 @@
+<h1>Sign up to vote</h1>
+
+<%= form_for @person do |f| -%>
+	<% unless @person.errors.empty? %>
+	<ul>
+		<% @person.errors.full_messages.each do |m| -%>
+			<li><%= m %></li>
+		<% end %>
+	</ul>
+	<% end %>
+	
+	<strong>Name:</strong> <%= f.text_field :name %><br/>
+	<strong>Password:</strong> <%= f.password_field :password %><br/>
+	<strong>Confirm:</strong> <%= f.password_field :password_confirmation %><br/>
+	<%= f.submit "Sign Up" %>
+<% end %>

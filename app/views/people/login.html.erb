@@ -1,0 +1,9 @@
+<h1>Login to vote for lunch</h1>
+
+<form action="<%= login_url %>" method="post">
+	<strong>Name:</strong>
+	<%= text_field_tag :name %><br/>
+	<strong>Password:</strong>
+	<%= password_field_tag :password %><br/>
+	<%= submit_tag "Login" %>
+</form>
