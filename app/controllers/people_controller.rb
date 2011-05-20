@@ -8,6 +8,7 @@ class PeopleController < ApplicationController
   def create
     @person = Person.create(params[:person])
     if @person.valid?
+      session[:user] = @person
       respond_with(@person, :location => places_url)
     else
       respond_with(@person) do |format|

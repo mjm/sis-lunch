@@ -3,6 +3,6 @@ class Place < ActiveRecord::Base
   
   belongs_to :person
   
-  has_many :votes
+  has_many :votes, :dependent => :destroy
   has_many :people, :through => :votes
 end

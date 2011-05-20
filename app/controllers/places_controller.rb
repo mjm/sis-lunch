@@ -19,7 +19,7 @@ class PlacesController < ApplicationController
   end
   
   def destroy
-    @place = Place.find(params[:id])
+    @place = Place.first(:conditions => {:id => params[:id], :person_id => session[:user]})
     @place.destroy
     respond_with(@place)
   end
