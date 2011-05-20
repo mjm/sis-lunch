@@ -8,6 +8,11 @@ class PlacesController < ApplicationController
     respond_with(@places)
   end
   
+  def periodic
+    @places = Place.all
+    render :partial => 'places'
+  end
+  
   def create
     @place = Place.create(params[:place].merge(:person => session[:user]))
     if @place.valid?

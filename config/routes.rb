@@ -4,6 +4,7 @@ Lunch::Application.routes.draw do
   resources :people
 
   resources :places
+  match 'periodic' => 'places#periodic'
   
   match 'login' => 'people#login', :as => :login
   match 'logout' => 'people#logout', :as => :logout
