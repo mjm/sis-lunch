@@ -1,6 +1,6 @@
 <table id="places">
 	<% @places.each do |p| -%>
-		<tr>
+		<tr id="place_<%=p.id%>">
 			<td><%= button_to "vote", votes_path(:place => p), :method => :post, :remote => true %></td>
 			<td>
 				<%= p.name %> 
