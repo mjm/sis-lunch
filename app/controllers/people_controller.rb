@@ -27,4 +27,9 @@ class PeopleController < ApplicationController
       end
     end
   end
+  
+  def logout
+    session[:user] = nil
+    redirect_to login_url
+  end
 end

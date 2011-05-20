@@ -40,7 +40,6 @@ body {
 
 #header {
    background-color: #4D84B2;
-   color: white;
    border-bottom: 1px solid #A1D3FF;
 }
 
@@ -48,6 +47,11 @@ body {
    font-weight: normal;
    margin: 0;
    padding: 20px;
+}
+
+#header a {
+    color: white;
+	text-decoration: none;
 }
 
 #container {

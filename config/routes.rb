@@ -6,6 +6,7 @@ Lunch::Application.routes.draw do
   resources :places
   
   match 'login' => 'people#login', :as => :login
+  match 'logout' => 'people#logout', :as => :logout
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
