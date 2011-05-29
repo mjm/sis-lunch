@@ -11,20 +11,22 @@ body {
 	font-size: .9em;
 	margin: 0;
 	padding: 0;
-	background-color: #FFE4BA;
+	background-color: #ffffff;
+	color: #444444;
 }
 
 #header {
-	background-color: #4D84B2;
-	border-bottom: 1px solid #A1D3FF;
+	background-color: #dddddd;
+	border-bottom: #cccccc;
 	h1 {
-		font-weight: normal;
+		font-weight: bold;
 		margin: 0;
-		padding: 20px;
+		padding: 5px 5px 5px 10px;
 		font-size: 2em;
 	}
 	a {
-	    color: white;
+		display: block;
+	    color: #0073ea;
 		text-decoration: none;
 	}
 }
@@ -39,4 +41,8 @@ body {
 
 .add-form {
    margin-top: 20px;
+}
+
+.ui-dialog {
+	font-size: 0.9em;
 }
