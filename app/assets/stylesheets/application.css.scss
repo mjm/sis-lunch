@@ -1,0 +1,42 @@
+/* COLORS
+   #FFE4BA
+   #B2925F
+   #FFDAA1
+   #4D84B2
+   #A1D3FF
+ */
+
+body {
+	font-family: Helvetica, Arial, sans-serif;
+	font-size: .9em;
+	margin: 0;
+	padding: 0;
+	background-color: #FFE4BA;
+}
+
+#header {
+	background-color: #4D84B2;
+	border-bottom: 1px solid #A1D3FF;
+	h1 {
+		font-weight: normal;
+		margin: 0;
+		padding: 20px;
+		font-size: 2em;
+	}
+	a {
+	    color: white;
+		text-decoration: none;
+	}
+}
+
+#container {
+	padding: 20px;
+}
+
+#add-buttons {
+	margin-bottom: 30px;
+}
+
+.add-form {
+   margin-top: 20px;
+}

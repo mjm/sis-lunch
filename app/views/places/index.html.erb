@@ -1,8 +1,9 @@
-<%= render :partial => 'places' %>
+<div id="add-buttons">
+	<button id="add-place">Add a Place</button>
 
-<h2>Add a place</h2>
-<%= render :partial => 'place', :locals => {:place => @place} %>
-
-<div id="test">
-	
+	<div id="add-place-form" style="display:none" class="add-form">
+	<%= render :partial => 'place', :locals => {:place => @place} %>
+	</div>
 </div>
+
+<table id="places"><%= render :partial => 'places' %></table>

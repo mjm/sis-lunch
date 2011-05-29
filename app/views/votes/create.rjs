@@ -1,2 +1,0 @@
-page.replace "places", :partial => "places/places"
-page.visual_effect :highlight, "places"

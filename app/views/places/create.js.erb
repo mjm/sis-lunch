@@ -1,0 +1,4 @@
+$('#places').html('<%= escape_javascript(render :partial => "places") %>');
+$('#new_place').replace('<%= escape_javascript(render :partial => "place", :object => Place.new) %>');
+
+stylePlaces();

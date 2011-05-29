@@ -1,0 +1,29 @@
+#places {
+	border-collapse: collapse;
+	td {
+		vertical-align: top;
+		padding: 5px;
+	}
+	tr {
+		background-color: #FFDAA1;
+		border: 1px solid #B2925F;
+	}
+	ul {
+		list-style: none;
+		margin-left: 0;
+		padding-left: 0;
+	}
+	li a {
+		font-size: 0.6em;
+	}
+	li.other-vote {
+		background-image: url(/css/flick/images/ui-icons_666666_256x240.png);
+		background-repeat: no-repeat;
+		background-position: -208px -192px;
+		padding-left: 22px;
+		margin-left: 3px;
+	}
+	.place-name {
+		font-weight: bold;
+	}
+}

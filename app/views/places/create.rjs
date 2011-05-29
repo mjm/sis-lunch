@@ -1,4 +1,0 @@
-page.replace "places", :partial => "places"
-page.replace "new_place", :partial => "place", :object => Place.new
-
-page.visual_effect :highlight, "places"

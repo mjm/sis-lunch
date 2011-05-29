@@ -1,1 +1,0 @@
-page.remove "vote_#{@vote.id}"
