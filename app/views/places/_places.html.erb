@@ -19,7 +19,9 @@
 			</ul>
 			<% end %>
 		</td>
-		<td width="80"><%= p.walkable? and "Walking" or "Driving" %>
+		<td width="120">
+			<%= p.walkable? and "Walking" or "Driving (#{pluralize(p.num_seats, "seat")})" %>
+		</td>
 		<td width="20"><%= link_to "Delete Place", place_path(p), :method => :delete, :confirm => 'Are you sure you want to delete this place? All votes will be lost.', :remote => true, :class => 'delete-button' if p.person == @current_user %></td>
 	</tr>
 <% end %>
