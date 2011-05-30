@@ -15,12 +15,8 @@ class PlacesController < ApplicationController
   
   def create
     @place = Place.create(params[:place].merge(:person => session[:user]))
-    if @place.valid?
-      @places = Place.all
-      respond_with(@place)
-    else
-      
-    end
+    @places = Place.all
+    respond_with(@place, :location => places_url)
   end
   
   def destroy

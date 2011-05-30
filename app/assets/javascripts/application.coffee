@@ -1,16 +1,13 @@
-# window.stylePlaces = ->
-# 	$('#places .delete-button').button
-# 		icons:
-# 			primary: "ui-icon-closethick"
-# 		text: false
-# 	$('#places .vote-button').button
-# 		icons:
-# 			primary: "ui-icon-check"
-# 	$('#places .unvote-button').button
-# 		icons:
-# 			primary: "ui-icon-close"
+showMessage = (elem, message) ->
+	elem.find('.message').text(message)
+	elem.fadeIn().delay(3000).fadeOut().siblings().hide()
 
-			
+window.notice = (message) ->
+	showMessage $('#messages .ui-state-highlight'), message
+
+window.error = (message) ->
+	showMessage $('#messages .ui-state-error'), message
+
 createAddPlaceDialog = ->
 	addDialog = $('#add-place-dialog')
 	addForm = addDialog.find 'form'

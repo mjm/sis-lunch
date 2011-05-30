@@ -12,6 +12,17 @@
 	<div id="header">
 		<h1><%= link_to "lunch", places_path %></h1>
 	</div>
+	
+	<div id="messages">
+		<p class="ui-state-error" style="display:none">
+			<span class="ui-icon ui-icon-alert"></span>
+			<span class="message"></span>
+		</p>
+		<p class="ui-state-highlight" style="display:none">
+			<span class="ui-icon ui-icon-info"></span>
+			<span class="message"></span>
+		</p>
+	</div>
 
 	<div id="container">
 		<%= yield %>
