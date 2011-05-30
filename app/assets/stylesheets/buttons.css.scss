@@ -2,6 +2,6 @@
 	font-size: 11px;
 }
 
-.delete-button, .vote-button, #add-place, input[type=submit] {
+.delete-button, .vote-button, .unvote-button, #add-place, input[type=submit] {
 	@include button;
 }

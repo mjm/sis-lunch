@@ -27,4 +27,16 @@
 	.place-name {
 		font-weight: bold;
 	}
+	.vote-button, .unvote-button {
+		width: 100%;
+	}
+	.ui-state-default.unvote-button {
+		color: #ff0084;
+	}
+	.ui-state-hover.unvote-button {
+		color: #ffffff;
+	}
+	.ui-state-active.unvote-button {
+		color: #0073ea;
+	}
 }

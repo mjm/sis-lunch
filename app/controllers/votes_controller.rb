@@ -11,6 +11,7 @@ class VotesController < ApplicationController
   def destroy
     @vote = Vote.find(params[:id])
     @vote.destroy
+    @places = Place.all
     respond_with(@vote)
   end
 end

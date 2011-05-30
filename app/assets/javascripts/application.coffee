@@ -6,10 +6,13 @@ window.stylePlaces = ->
 	$('#places .vote-button').button
 		icons:
 			primary: "ui-icon-check"
+	$('#places .unvote-button').button
+		icons:
+			primary: "ui-icon-close"
 			
 createAddPlaceDialog = ->
 	addDialog = $('#add-place-dialog')
-	addForm = addDialog.children 'form'
+	addForm = addDialog.find 'form'
 	
 	placeNameField = $('#place_name')
 	walkingField = $('#place_walkable')
@@ -57,10 +60,10 @@ configureOptions = (options) ->
 	buttons.button()
 
 $(document).ready ->
-	setInterval ->
-		$('#places').load '/periodic', ->
-			stylePlaces()
-	, 2000
+	# setInterval ->
+	# 	$('#places').load '/periodic', ->
+	# 		stylePlaces()
+	# , 2000
 	
 	createAddPlaceDialog()
 	
