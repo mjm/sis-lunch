@@ -1,4 +1,6 @@
 Lunch::Application.routes.draw do
+  resources :cars
+
   resources :votes
 
   resources :people

@@ -10,13 +10,21 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110519211403) do
+ActiveRecord::Schema.define(:version => 20110530022728) do
+
+  create_table "cars", :force => true do |t|
+    t.integer  "person_id"
+    t.integer  "seats"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "people", :force => true do |t|
     t.string   "name"
     t.string   "password"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "has_car"
   end
 
   create_table "places", :force => true do |t|

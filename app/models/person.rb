@@ -2,6 +2,7 @@ require 'digest'
 
 class Person < ActiveRecord::Base
   has_one :place, :through => :votes
+  has_one :car
   
   validates_presence_of :name
   validates_uniqueness_of :name

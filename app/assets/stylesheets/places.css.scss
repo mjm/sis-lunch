@@ -1,27 +1,28 @@
 #places {
+	width: 100%;
 	border-collapse: collapse;
+	font-size: 0.9em;
 	td {
 		vertical-align: top;
-		padding: 5px;
+		padding: 8px 5px 5px 5px;
 	}
 	tr {
 		background-color: #eeeeee;
 		border: 1px solid #dddddd;
 	}
 	ul {
-		list-style: none;
-		margin-left: 0;
+/*		list-style: none;*/
 		padding-left: 0;
+		margin: 8px 0 5px 30px;
+	}
+	li {
+		text-indent: -4px;
 	}
 	li a {
 		font-size: 0.6em;
 	}
-	li.other-vote {
-		background-image: url(/css/flick/images/ui-icons_666666_256x240.png);
-		background-repeat: no-repeat;
-		background-position: -208px -192px;
-		padding-left: 22px;
-		margin-left: 3px;
+	li.my-vote {
+		text-indent: -28px;
 	}
 	.place-name {
 		font-weight: bold;

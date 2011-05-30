@@ -16,6 +16,21 @@
 	<div id="container">
 		<%= yield %>
 	</div>
+	
+	<% if @current_user %>
+	<div id="options">
+		<h2>Options</h2>
+		<%= form_for @current_car, :remote => true do |f| -%>
+		<p>
+			<%= check_box_tag :has_car, '1', @current_user.has_car? %> I have a car.
+			<span id="seat_count">
+				I have <%= f.number_field :seats, :size => 5, :step => 1 %> seats total.
+			</span>
+		</p>
+		<%= f.submit "Save Car" %>
+		<% end %>
+	</div>
+	<% end %>
 
 </body>
 </html>
