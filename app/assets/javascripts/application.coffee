@@ -1,14 +1,15 @@
-window.stylePlaces = ->
-	$('#places .delete-button').button
-		icons:
-			primary: "ui-icon-closethick"
-		text: false
-	$('#places .vote-button').button
-		icons:
-			primary: "ui-icon-check"
-	$('#places .unvote-button').button
-		icons:
-			primary: "ui-icon-close"
+# window.stylePlaces = ->
+# 	$('#places .delete-button').button
+# 		icons:
+# 			primary: "ui-icon-closethick"
+# 		text: false
+# 	$('#places .vote-button').button
+# 		icons:
+# 			primary: "ui-icon-check"
+# 	$('#places .unvote-button').button
+# 		icons:
+# 			primary: "ui-icon-close"
+
 			
 createAddPlaceDialog = ->
 	addDialog = $('#add-place-dialog')
@@ -62,7 +63,7 @@ configureOptions = (options) ->
 $(document).ready ->
 	setInterval ->
 		$('#places').load '/periodic', ->
-			stylePlaces()
+			$('#places').trigger('update')
 	, 2000
 	
 	createAddPlaceDialog()
@@ -71,4 +72,15 @@ $(document).ready ->
 	if options.size() > 0
 		configureOptions options
 	
-	stylePlaces()
+	$('#places').bind 'update', ->
+		$('#places .delete-button').button
+			icons:
+				primary: "ui-icon-closethick"
+			text: false
+		$('#places .vote-button').button
+			icons:
+				primary: "ui-icon-check"
+		$('#places .unvote-button').button
+			icons:
+				primary: "ui-icon-close"
+	$('#places').trigger('update')

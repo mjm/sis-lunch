@@ -1,3 +1,1 @@
-$('#places').html('<%= escape_javascript(render :partial => "places") %>');
-
-stylePlaces();
+$('#places').html('<%= escape_javascript(render :partial => "places") %>').trigger('update');
