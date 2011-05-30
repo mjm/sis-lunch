@@ -60,10 +60,10 @@ configureOptions = (options) ->
 	buttons.button()
 
 $(document).ready ->
-	# setInterval ->
-	# 	$('#places').load '/periodic', ->
-	# 		stylePlaces()
-	# , 2000
+	setInterval ->
+		$('#places').load '/periodic', ->
+			stylePlaces()
+	, 2000
 	
 	createAddPlaceDialog()
 	
