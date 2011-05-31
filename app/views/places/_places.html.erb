@@ -8,7 +8,7 @@
 		<% end %>
 		</td>
 		<td>
-			<span class="place-name"><%= p.name %></span>
+			<span class="place-name"><%= p.name %></span> (added by <%= p.person.name %>)
 			<% unless p.votes.empty? -%>
 			<ul>
 				<% p.votes.each do |v| -%>
