@@ -1,2 +1,5 @@
-$('#places').html("<%= escape_javascript(render :partial => "places/places") %>").trigger('update');
+$('#places')
+	.trigger('beforeupdate')
+	.html('<%= escape_javascript(render :partial => "places/places") %>')
+	.trigger('update');
 notice('You are no longer voted for "<%= escape_javascript(@vote.place.name) %>".');

@@ -10,17 +10,40 @@
 		<td>
 			<span class="place-name"><%= p.name %></span> (added by <%= p.person.name %>)
 			<% unless p.votes.empty? -%>
-			<ul>
-				<% p.votes.each do |v| -%>
-				<li id="vote_<%=v.id%>">
-					<%= v.person.name %>
-				</li>
+				<% if p.walkable? %>
+				<ul>
+					<% p.votes.each do |v| -%>
+					<li id="vote_<%=v.id%>">
+						<%= v.person.name %>
+					</li>
+					<% end %>
+				</ul>
+				<% else %>
+				<table class="car-seats">
+					<tr>
+						<% (p.car_owners + [nil]).each do |person| %>
+						<td data-car="<%= person.try(:car).try(:id) %>">
+							<strong><%= person and "#{person.name}'s Car" or "Unclaimed" %></strong>
+                            <%= "(#{pluralize(person.car.seats_left(p), "seat")} left)" if person %>
+							<ul>
+                                <% p.votes_for_car(person.try(:car)).each do |vote| %>
+                                <li class="<%= "mine" if vote.person == @current_user %>"
+                                    data-vote="<%= vote.id %>"><%= vote.person.name %></li>
+                                <% end %>
+							</ul>
+						</td>
+						<% end %>
+					</tr>
+				</table>
 				<% end %>
-			</ul>
 			<% end %>
 		</td>
 		<td width="120">
-			<%= p.walkable? and "Walking" or "Driving (#{pluralize(p.num_seats, "seat")})" %>
+			<% if p.walkable? %>
+				Walking
+			<% else %>
+				Driving (<%= pluralize(p.num_seats, "seat") %>)
+			<% end %>
 		</td>
 		<td width="20"><%= link_to "Delete Place", place_path(p), :method => :delete, :confirm => 'Are you sure you want to delete this place? All votes will be lost.', :remote => true, :class => 'delete-button' if p.person == @current_user %></td>
 	</tr>

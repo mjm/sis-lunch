@@ -1,5 +1,8 @@
 <% if @place.valid? %>
-$('#places').html('<%= escape_javascript(render :partial => "places") %>').trigger('update');
+$('#places')
+	.trigger('beforeupdate')
+	.html('<%= escape_javascript(render :partial => "places") %>')
+	.trigger('update');
 notice('The place "<%= escape_javascript(@place.name) %>" has been added.');
 <% else %>
 error('The place could not be added.');

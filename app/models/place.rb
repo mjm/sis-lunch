@@ -19,4 +19,13 @@ class Place < ActiveRecord::Base
       end
     end 
   end
+  
+  def car_owners
+    people.select(&:has_car?)
+  end
+
+  def votes_for_car(car)
+    votes.select {|v| v.car == car }
+  end
+
 end

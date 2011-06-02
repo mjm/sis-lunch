@@ -59,25 +59,48 @@ configureOptions = (options) ->
 
 $(document).ready ->
 	setInterval ->
-		$('#places').load '/periodic', ->
-			$('#places').trigger('update')
-	, 2000
+		$.get '/periodic', (data) ->
+#			$('#places')
+#				.trigger('beforeupdate')
+#				.html(data)
+#				.trigger('update')
+	, 5000
 	
 	createAddPlaceDialog()
 	
 	options = $('#options')
 	if options.size() > 0
 		configureOptions options
-	
-	$('#places').bind 'update', ->
-		$('#places .delete-button').button
+		
+	$('#places').bind('beforeupdate', ->
+		# $('.car-dialog').dialog('destroy').remove()
+	).bind 'update', ->
+		$(this).find('.delete-button').button
 			icons:
 				primary: "ui-icon-closethick"
 			text: false
-		$('#places .vote-button').button
+		$(this).find('.vote-button').button
 			icons:
 				primary: "ui-icon-check"
-		$('#places .unvote-button').button
+		$(this).find('.unvote-button').button
 			icons:
 				primary: "ui-icon-close"
+		
+		$(this).find('.car-seats td').droppable
+		    hoverClass: 'ui-state-highlight'
+		    tolerance: 'pointer'
+		    drop: (event, ui) ->
+		        $(this).find('ul').append(ui.draggable)
+		        ui.draggable.css('left', 0).css('top', 0)
+		        $.ajax '/votes/'+ui.draggable.attr('data-vote'),
+		            type: 'PUT'
+		            data:
+		                car_id: $(this).attr('data-car')
+		            success: ->
+		                console.log 'Moved to new car'
+		            
+
+		$(this).find('.car-seats li.mine').draggable
+		    revert: 'invalid'
+
 	$('#places').trigger('update')

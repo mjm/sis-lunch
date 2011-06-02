@@ -7,7 +7,16 @@ class VotesController < ApplicationController
     @places = Place.all
     respond_with(@vote)
   end
-  
+
+  def update
+    @vote = Vote.find(params[:id])
+    @vote.car_id = params[:car_id]
+    @vote.save
+
+    @places = Place.all
+    respond_with(@vote)
+  end
+
   def destroy
     @vote = Vote.find(params[:id])
     @vote.destroy
