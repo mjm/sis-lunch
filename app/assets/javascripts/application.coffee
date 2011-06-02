@@ -60,10 +60,10 @@ configureOptions = (options) ->
 $(document).ready ->
 	setInterval ->
 		$.get '/periodic', (data) ->
-#			$('#places')
-#				.trigger('beforeupdate')
-#				.html(data)
-#				.trigger('update')
+			$('#places')
+				.trigger('beforeupdate')
+				.html(data)
+				.trigger('update')
 	, 5000
 	
 	createAddPlaceDialog()
@@ -72,9 +72,7 @@ $(document).ready ->
 	if options.size() > 0
 		configureOptions options
 		
-	$('#places').bind('beforeupdate', ->
-		# $('.car-dialog').dialog('destroy').remove()
-	).bind 'update', ->
+	$('#places').bind 'update', ->
 		$(this).find('.delete-button').button
 			icons:
 				primary: "ui-icon-closethick"
@@ -99,7 +97,6 @@ $(document).ready ->
 		            success: ->
 		                console.log 'Moved to new car'
 		            
-
 		$(this).find('.car-seats li.mine').draggable
 		    revert: 'invalid'
 
