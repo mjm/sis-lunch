@@ -94,8 +94,6 @@ $(document).ready ->
 		            type: 'PUT'
 		            data:
 		                car_id: $(this).attr('data-car')
-		            success: ->
-		                console.log 'Moved to new car'
 		            
 		$(this).find('.car-seats li.mine').draggable
 		    revert: 'invalid'
