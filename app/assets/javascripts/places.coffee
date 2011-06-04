@@ -1,3 +1,5 @@
+blockUpdates = false
+
 $(document).ready ->
 	$('#places').bind 'update', ->
 		$(this).find('.delete-button').button
@@ -24,13 +26,18 @@ $(document).ready ->
 		            
 		$(this).find('.car-seats li.mine').draggable
 		    revert: 'invalid'
+		    start: ->
+                blockUpdates = true
+            stop: ->
+                blockUpdates = false
 
 	$('#places').trigger('update')
 	
 	setInterval ->
-		$.get '/periodic', (data) ->
-			$('#places')
-				.trigger('beforeupdate')
-				.html(data)
-				.trigger('update')
+		if not blockUpdates
+			$.get '/periodic', (data) ->
+				$('#places')
+					.trigger('beforeupdate')
+					.html(data)
+					.trigger('update') if not blockUpdates
 	, 5000
