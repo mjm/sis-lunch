@@ -11,7 +11,6 @@
 		border: 1px solid #dddddd;
 	}
 	ul {
-/*		list-style: none;*/
 		padding-left: 0;
 		margin: 8px 0 5px 30px;
 	}
@@ -21,15 +20,28 @@
 	li a {
 		font-size: 0.6em;
 	}
-	li.my-vote {
-		text-indent: -28px;
-	}
 	.place-name {
 		font-weight: bold;
 	}
+	
+	.car-seats {
+	    margin-top: 10px;
+	    margin-left: 10px;
+	    tr {
+	        background-color: #f8f8f8;
+	    }
+	    td {
+	        padding: 8px;
+	    }
+	    .mine {
+	        cursor: pointer;
+	    }
+	}
+	
 	.vote-button, .unvote-button {
 		width: 100%;
 	}
+	
 	.ui-state-default.unvote-button {
 		color: #ff0084;
 	}
