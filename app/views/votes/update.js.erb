@@ -1,9 +1,9 @@
-<% if @vote.valid? %>
 $('#places')
 	.trigger('beforeupdate')
 	.html('<%= escape_javascript(render :partial => "places/places") %>')
 	.trigger('update');
+<% if @vote.valid? %>
 notice('Your seat choice has been changed.');
 <% else %>
-error('Your seat choice could not be changed.');
+<%= js_error @vote %>
 <% end %>

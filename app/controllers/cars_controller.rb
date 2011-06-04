@@ -23,9 +23,11 @@ class CarsController < ApplicationController
       if params[:has_car]
         @current_car.seats = params[:car][:seats]
         @current_car.save
+      elsif @current_car
+        @current_car.destroy
       end
       
-      respond_with(@current_car, :location => car_url(@current_car)) do |format|
+      respond_to do |format|
         format.js { render :save }
       end
     end

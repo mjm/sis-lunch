@@ -14,7 +14,6 @@ class VotesController < ApplicationController
     @vote.save
 
     @places = Place.all
-    respond_with(@vote)
   end
 
   def destroy
