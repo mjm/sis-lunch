@@ -1,5 +1,6 @@
 <%= form_for place, :remote => true do |f| -%>
 	<%= f.text_field :name %><br/>
-	<%= f.check_box :walkable %> Walking distance?<br/>
+	Leave at: <%= f.time_select :leaving_at, :include_blank => true, :minute_step => 15 %><br/>
+	<%= f.check_box :walkable %> <%= f.label :walkable, "Walking distance?" %><br/>
 	<%= f.submit "Add" %>
 <% end %>

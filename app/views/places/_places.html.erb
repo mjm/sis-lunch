@@ -9,6 +9,9 @@
 		</td>
 		<td>
 			<span class="place-name"><%= p.name %></span> (added by <%= p.person.name %>)
+			<% if p.leaving_at %>
+			<p class="place-time">Leaving at <%= p.leaving_at.to_s(:time) %></p>
+			<% end %>
 			<% unless p.votes.empty? -%>
 				<% if p.walkable? %>
 				<ul>
