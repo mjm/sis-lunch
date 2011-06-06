@@ -27,11 +27,11 @@ $(document).ready ->
 		                car_id: $(this).attr('data-car')
 		            
 		$(this).find('.car-seats li.mine').draggable
-		    revert: 'invalid'
-		    start: ->
-                blockUpdates = true
-            stop: ->
-                blockUpdates = false
+	    revert: 'invalid'
+	    start: ->
+        blockUpdates = true
+      stop: ->
+        blockUpdates = false
 
 	$('#places').trigger('update')
 	
