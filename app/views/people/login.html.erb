@@ -1,11 +1,15 @@
+<div class="person-form">
+
 <h1><%=t '.heading' %></h1>
 
 <form action="<%= login_url %>" method="post">
-	<strong><%= label_tag :name, Person.human_attribute_name(:name) %>:</strong>
-	<%= text_field_tag :name %><br/>
-	<strong><%= label_tag :password, Person.human_attribute_name(:password) %>:</strong>
-	<%= password_field_tag :password %><br/>
+	<%= label_tag :name, Person.human_attribute_name(:name) %>
+	<%= text_field_tag :name, '', :autofocus => true %>
+	<%= label_tag :password, Person.human_attribute_name(:password) %>
+	<%= password_field_tag :password %>
 	<%= submit_tag t(".submit") %>
 </form>
 
 <p><%=t '.signup_html', :path => new_person_path %></p>
+
+</div>

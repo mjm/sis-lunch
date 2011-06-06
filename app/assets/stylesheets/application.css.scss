@@ -53,8 +53,13 @@ body {
 
 #container {
 	margin-top: 45px;
-	margin-right: 30%;
 	padding: 20px;
+}
+
+.logged-in {
+  #container {
+    margin-right: 30%;
+  }
 }
 
 #add-buttons {

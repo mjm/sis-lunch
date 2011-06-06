@@ -1,0 +1,37 @@
+.person-form {
+  width: 500px;
+  border: 1px solid #cccccc;
+  background: #eeeeee;
+  padding: 15px;
+  margin: 0 auto;
+  
+  h1 {
+    font-size: 1.8em;
+    font-weight: normal;
+    margin-bottom: 20px;
+  }
+  
+  p {
+    margin-top: 10px;
+  }
+  
+  input {
+    display: block;
+  }
+  
+  input[type="submit"] {
+    margin-top: 10px;
+    font-size: 14px !important;
+  }
+  
+  label {
+    width: 100px;
+    display: block;
+    float: left;
+    clear: left;
+  }
+  
+  label:after {
+    content: ':';
+  }
+}

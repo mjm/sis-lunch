@@ -2,13 +2,13 @@
 <html>
 <head>
   <title>Lunch</title>
-  <link type="text/css" href="css/flick/jquery-ui-1.8.13.custom.css" rel="stylesheet" />
+  <link type="text/css" href="/css/flick/jquery-ui-1.8.13.custom.css" rel="stylesheet" />
 
   <%= stylesheet_link_tag "application" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
 </head>
-<body>
+<body class="<%= @current_user and "logged-in" or "logged-out" %>">
 	<div id="header">
 		<h1><%= link_to t(".title"), places_path %></h1>
 	</div>

@@ -6,7 +6,7 @@ en:
     login:
       heading: Login to vote for lunch
       submit: Login
-      signup_html: "Or you can <a href='%{path}'>sign up</a>."
+      signup_html: "Or you can <a href='%{path}'>sign up</a> for an account."
       failed: Your username or password was incorrect. Please try again.
     new:
       heading: Sign up to vote

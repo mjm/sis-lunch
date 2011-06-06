@@ -1,3 +1,5 @@
+<div class="person-form">
+
 <h1><%=t '.heading' %></h1>
 
 <%= form_for @person do |f| -%>
@@ -9,8 +11,13 @@
 	</ul>
 	<% end %>
 	
-	<strong><%= f.label :name %>:</strong> <%= f.text_field :name %><br/>
-	<strong><%= f.label :password %>:</strong> <%= f.password_field :password %><br/>
-	<strong><%= f.label :password_confirmation %>:</strong> <%= f.password_field :password_confirmation %><br/>
+	<%= f.label :name %>
+	<%= f.text_field :name, :autofocus => true %>
+	<%= f.label :password %>
+	<%= f.password_field :password %>
+	<%= f.label :password_confirmation %>
+	<%= f.password_field :password_confirmation %>
 	<%= f.submit %>
 <% end %>
+
+</div>
