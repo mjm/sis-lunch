@@ -4,6 +4,7 @@ createAddPlaceDialog = ->
 	
 	placeNameField = $('#place_name')
 	walkingField = $('#place_walkable')
+	timeFields = $('#add-place-dialog select')
 	submitButton = $('#add-place-dialog input[type=submit]')
 		
 	addDialog.dialog
@@ -18,10 +19,11 @@ createAddPlaceDialog = ->
 		}]
 		open: ->
 			placeNameField.val ''
+			timeFields.val ''
 			walkingField.removeAttr 'checked'
 			placeNameField.focus()
 
-	$('#add-place').button({icons: {primary:"ui-icon-plusthick"}}).click ->
+	$('#add-place').button(icons: {primary:"ui-icon-plusthick"}).click ->
 		addDialog.dialog 'open'
 			
 	submitButton.hide()
