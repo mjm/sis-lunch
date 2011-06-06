@@ -16,7 +16,6 @@ class PlacesController < ApplicationController
   def create
     @place = Place.create(params[:place].merge(:person => session[:user]))
     @places = Place.all
-    respond_with(@place, :location => places_url)
   end
   
   def destroy

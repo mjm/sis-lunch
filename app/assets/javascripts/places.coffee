@@ -17,8 +17,6 @@ $(document).ready ->
 		    hoverClass: 'ui-state-highlight'
 		    tolerance: 'pointer'
 		    accept: (draggable) ->
-		        console.log "Draggable place: #{draggable.attr('data-place')}"
-		        console.log "Droppable place: #{$(this).attr('data-place')}"
 		        draggable.attr('data-place') == $(this).attr('data-place')
 		    drop: (event, ui) ->
 		        $(this).find('ul').append(ui.draggable)

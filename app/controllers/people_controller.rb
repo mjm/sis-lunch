@@ -11,9 +11,7 @@ class PeopleController < ApplicationController
       session[:user] = @person
       respond_with(@person, :location => places_url)
     else
-      respond_with(@person) do |format|
-        format.html { render :new }
-      end
+      render :new
     end
   end
   
@@ -23,7 +21,7 @@ class PeopleController < ApplicationController
       if session[:user]
         redirect_to places_url
       else
-        flash.now[:error] = "Your username or password was incorrect. Please try again."
+        flash.now[:error] = t('people.login.failed')
       end
     end
   end

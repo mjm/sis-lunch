@@ -2,15 +2,15 @@
 	<tr id="place_<%=p.id%>">
 		<td width="70">
 		<% if p.people.include? @current_user %>
-			<%= link_to "Unvote", vote_path(p.vote_for(@current_user)), :method => :delete, :remote => true, :class => 'unvote-button' %>
+			<%= link_to t('.unvote'), vote_path(p.vote_for(@current_user)), :method => :delete, :remote => true, :class => 'unvote-button' %>
 		<% else %>
-			<%= link_to "Vote", votes_path(:place => p), :method => :post, :remote => true, :class => 'vote-button' %>
+			<%= link_to t(".vote"), votes_path(:place => p), :method => :post, :remote => true, :class => 'vote-button' %>
 		<% end %>
 		</td>
 		<td>
-			<span class="place-name"><%= p.name %></span> (added by <%= p.person.name %>)
+			<span class="place-name"><%= p.name %></span> <%=t '.added_by', :name => p.person.name %>
 			<% if p.leaving_at %>
-			<p class="place-time">Leaving at <%= p.leaving_at.to_s(:time) %></p>
+			<p class="place-time"><%=t '.leaving_at' %> <%= p.leaving_at.to_s(:time) %></p>
 			<% end %>
 			<% unless p.votes.empty? -%>
 				<% if p.walkable? %>
@@ -26,8 +26,8 @@
 					<tr>
 						<% (p.car_owners + [nil]).each do |person| %>
 						<td data-car="<%= person.try(:car).try(:id) %>" data-place="<%= p.id %>">
-							<strong><%= person and "#{person.name}'s Car" or "Unclaimed" %></strong>
-                            <%= "(#{pluralize(person.car.seats_left(p), "seat")} left)" if person %>
+							<strong><%= person and t('.person_car', :name => person.name) or t('.unclaimed') %></strong>
+                            <%=t '.seats_left', :count => person.car.seats_left(p) if person %>
 							<ul>
                                 <% p.votes_for_car(person.try(:car)).each do |vote| %>
                                 <li class="<%= "mine" if vote.person == @current_user %>"
@@ -45,12 +45,8 @@
 			<% end %>
 		</td>
 		<td width="80">
-			<% if p.walkable? %>
-				Walking
-			<% else %>
-				Driving
-			<% end %>
+		    <%= p.walkable? and t('.walking') or t('.driving') %>
 		</td>
-		<td width="20"><%= link_to "Delete Place", place_path(p), :method => :delete, :confirm => 'Are you sure you want to delete this place? All votes will be lost.', :remote => true, :class => 'delete-button' if p.person == @current_user %></td>
+		<td width="20"><%= link_to t('.delete.text'), place_path(p), :method => :delete, :confirm => t('.delete.confirm'), :remote => true, :class => 'delete-button' if p.person == @current_user %></td>
 	</tr>
 <% end %>

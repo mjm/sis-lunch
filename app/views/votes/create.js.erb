@@ -3,7 +3,7 @@ $('#places')
 	.trigger('beforeupdate')
 	.html('<%= escape_javascript(render :partial => "places/places") %>')
 	.trigger('update');
-notice('You have voted for "<%= escape_javascript(@vote.place.name) %>".');
+<%= js_notice t('.success', :name => @vote.place.name) %>
 <% else %>
-error('Your vote could not be placed.');
+<%= js_error @vote %>
 <% end %>

@@ -3,7 +3,8 @@ $('#places')
 	.trigger('beforeupdate')
 	.html('<%= escape_javascript(render :partial => "places") %>')
 	.trigger('update');
-notice('The place "<%= escape_javascript(@place.name) %>" has been added.');
+$('#add-place-dialog').dialog('close');
+<%= js_notice t('.success', :name => @place.name) %>
 <% else %>
-error('The place could not be added.');
+<%= js_error @place %>
 <% end %>

@@ -1,5 +1,12 @@
 module ApplicationHelper
-  def js_error(model)
-    "error('#{escape_javascript model.errors.full_messages.first}');"
+  def js_error(msg)
+    unless msg.is_a? String
+      msg = msg.errors.full_messages.first
+    end
+    "error('#{escape_javascript msg}');"
+  end
+  
+  def js_notice(msg)
+    "notice('#{escape_javascript msg}');"
   end
 end

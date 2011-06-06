@@ -1,5 +1,5 @@
 <% if @current_car.valid? %>
-notice('Your car settings have been saved.');
+<%= js_notice t('.success') %>
 <% else %>
 <%= js_error @current_car %>
 <% end %>

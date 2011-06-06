@@ -1,2 +1,2 @@
 $('#place_<%=@place.id%>').remove();
-notice('The place "<%= escape_javascript(@place.name) %>" has been removed.');
+<%= js_notice t('.success', :name => @place.name) %>

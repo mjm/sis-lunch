@@ -1,11 +1,11 @@
-<h1>Login to vote for lunch</h1>
+<h1><%=t '.heading' %></h1>
 
 <form action="<%= login_url %>" method="post">
-	<strong>Name:</strong>
+	<strong><%= label_tag :name, Person.human_attribute_name(:name) %>:</strong>
 	<%= text_field_tag :name %><br/>
-	<strong>Password:</strong>
+	<strong><%= label_tag :password, Person.human_attribute_name(:password) %>:</strong>
 	<%= password_field_tag :password %><br/>
-	<%= submit_tag "Login" %>
+	<%= submit_tag t(".submit") %>
 </form>
 
-<p>Or you can <%= link_to "sign up", new_person_path %></p>
+<p><%=t '.signup_html', :path => new_person_path %></p>
