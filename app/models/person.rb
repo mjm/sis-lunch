@@ -1,7 +1,8 @@
 require 'digest'
 
 class Person < ActiveRecord::Base
-  has_one :place, :through => :votes
+  has_one :vote, :dependent => :destroy
+  has_one :place, :through => :vote
   has_one :car
   
   validates :name, :presence => true, :uniqueness => true
