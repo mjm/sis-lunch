@@ -1,6 +1,21 @@
 <%= form_for place, :remote => true do |f| -%>
 	<%= f.text_field :name %><br/>
-	<%= f.label :leaving_at %>: <%= f.time_select :leaving_at, :include_blank => true, :minute_step => 15 %><br/>
+	<%= f.label :leaving_at %>:
+	<input id="place_leaving_at_1i" name="place[leaving_at(1i)]" type="hidden" value="" />
+	<input id="place_leaving_at_2i" name="place[leaving_at(2i)]" type="hidden" />
+	<input id="place_leaving_at_3i" name="place[leaving_at(3i)]" type="hidden" />
+	<select id="place_leaving_at_4i" name="place[leaving_at(4i)]">
+		<option value=""></option>
+		<% (9..16).each do |i| %>
+		<option value="<%= i %>"><%= i %></option>
+		<% end %>
+	</select> :
+	<select id="place_leaving_at_5i" name="place[leaving_at(5i)]">
+		<option value=""></option>
+		<% [0, 15, 30, 45].each do |i| %>
+		<option value="<%= i %>"><%= i %></option>
+		<% end %>
+	</select><br/>
 	<%= f.check_box :walkable %> <%= f.label :walkable %><br/>
 	<%= f.submit t(".add") %>
 <% end %>
