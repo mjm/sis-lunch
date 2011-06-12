@@ -1,10 +1,12 @@
 class Place < ActiveRecord::Base
-  validates_presence_of :name
+  validates :name, :presence => true
   
   belongs_to :person
   
   has_many :votes, :dependent => :destroy
   has_many :people, :through => :votes
+  
+  before_validation { write_attribute :name, name.strip }
   
   def vote_for(person)
     votes.detect {|v| v.person == person }

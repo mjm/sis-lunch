@@ -4,10 +4,10 @@ class Person < ActiveRecord::Base
   has_one :place, :through => :votes
   has_one :car
   
-  validates_presence_of :name
-  validates_uniqueness_of :name
-  validates_confirmation_of :password
+  validates :name, :presence => true, :uniqueness => true
+  validates :password, :confirmation => true
   
+  before_validation { write_attribute :name, name.strip }
   before_create :hash_password
   
   def self.hash_password(pass)
