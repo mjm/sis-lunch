@@ -38,7 +38,7 @@ en:
       seats_left:
         one: '(1 seat left)'
         other: '(%{count} seats left)'
-      unclaimed: Unclaimed
+      unclaimed: No Car Chosen
       walking: Walking
       driving: Driving
       delete:
