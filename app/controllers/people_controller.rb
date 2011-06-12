@@ -6,7 +6,7 @@ class PeopleController < ApplicationController
   end
   
   def create
-    @person = Person.create(params[:person])
+    @person = Person.create(params[:person].merge(:signup_up => request.remote_ip))
     if @person.valid?
       session[:user] = @person
       respond_with(@person, :location => places_url)
@@ -19,6 +19,8 @@ class PeopleController < ApplicationController
     if request.post?
       session[:user] = Person.authenticate(params[:name], params[:password])
       if session[:user]
+        session[:user].login_ip = request.remote_ip
+        session[:user].save
         redirect_to places_url
       else
         flash.now[:error] = t('people.login.failed')
