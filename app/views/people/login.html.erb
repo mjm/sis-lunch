@@ -4,12 +4,12 @@
 
 <form action="<%= login_url %>" method="post">
 	<%= label_tag :name, Person.human_attribute_name(:name) %>
-	<%= text_field_tag :name, '', :autofocus => true %>
+	<%= text_field_tag :name, '', autofocus: true %>
 	<%= label_tag :password, Person.human_attribute_name(:password) %>
 	<%= password_field_tag :password %>
 	<%= submit_tag t(".submit") %>
 </form>
 
-<p><%=t '.signup_html', :path => new_person_path %></p>
+<p><%=t '.signup_html', path: new_person_path %></p>
 
 </div>
