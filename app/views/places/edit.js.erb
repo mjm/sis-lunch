@@ -1,5 +1,4 @@
 (function() {
-  console.log(this);
   this.html("<%= escape_javascript render(partial: 'place', locals: {place: @place}) %>");
   var submit = this.find('input:submit');
   var form = this.find('form');
