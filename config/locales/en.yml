@@ -23,10 +23,13 @@ en:
   places:
     index:
       add: Add a Place
+      edit: Edit Place
     place:
       add: Add
     create:
       success: "The place '%{name}' has been added."
+    update:
+      success: "The place '%{name}' has been updated."
     destroy:
       success: "The place '%{name}' has been removed."
     places:
@@ -44,6 +47,7 @@ en:
       delete:
         text: 'Delete Place'
         confirm: 'Are you sure you want to delete this place? All votes will be lost.'
+      edit: Edit
   layouts:
     application:
       title: lunch
@@ -65,3 +69,6 @@ en:
       car:
         create: Save Car
         update: Save Car
+      place:
+        create: Add
+        update: Save

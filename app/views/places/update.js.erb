@@ -1,0 +1,10 @@
+<% if @place.valid? %>
+$('#places')
+	.trigger('beforeupdate')
+	.html('<%= escape_javascript(render :partial => "places") %>')
+	.trigger('update');
+$('#edit-place-dialog').dialog('close');
+<%= js_notice t('.success', :name => @place.name) %>
+<% else %>
+<%= js_error @place %>
+<% end %>

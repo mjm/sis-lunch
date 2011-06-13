@@ -18,6 +18,18 @@ class PlacesController < ApplicationController
     @places = Place.all
   end
   
+  def edit
+    @place = @current_user.places.find(params[:id])
+  end
+  
+  def update
+    @place = @current_user.places.find(params[:id])
+    @place.attributes = params[:place]
+    @place.save
+    
+    @places = Place.all
+  end
+  
   def destroy
     @place = Place.first(:conditions => {:id => params[:id], :person_id => session[:user]})
     @place.destroy

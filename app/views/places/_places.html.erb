@@ -47,6 +47,11 @@
 		<td width="80">
 		    <%= p.walkable? and t('.walking') or t('.driving') %>
 		</td>
-		<td width="20"><%= link_to t('.delete.text'), place_path(p), :method => :delete, :confirm => t('.delete.confirm'), :remote => true, :class => 'delete-button' if p.person == @current_user %></td>
+		<td width="20">
+			<%= link_to t('.edit'), edit_place_path(p), remote: true, class: 'edit-button' if p.person == @current_user %>
+		</td>
+		<td width="20">
+			<%= link_to t('.delete.text'), place_path(p), method: :delete, confirm: t('.delete.confirm'), remote: true, class: 'delete-button' if p.person == @current_user %>
+		</td>
 	</tr>
 <% end %>

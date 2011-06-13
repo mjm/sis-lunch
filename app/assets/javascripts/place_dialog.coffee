@@ -28,5 +28,14 @@ createAddPlaceDialog = ->
 			
 	submitButton.hide()
 	
+createEditPlaceDialog = ->
+  editDialog = $('#edit-place-dialog')
+  editDialog.dialog
+    autoOpen: false
+    modal: true
+    title: editDialog.attr('title')
+    resizable: false
+	
 $(document).ready ->
 	createAddPlaceDialog()
+	createEditPlaceDialog()

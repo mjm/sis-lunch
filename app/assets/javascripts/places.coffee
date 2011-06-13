@@ -6,6 +6,9 @@ $(document).ready ->
 			icons:
 				primary: "ui-icon-closethick"
 			text: false
+		$(this).find('.edit-button').button
+		  icons:
+		    primary: "ui-icon-pencil"
 		$(this).find('.vote-button').button
 			icons:
 				primary: "ui-icon-check"
