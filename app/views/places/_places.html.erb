@@ -25,7 +25,7 @@
 				<% else %>
 				<table class="car-seats">
 					<tr>
-						<% (p.car_owners + [nil]).each do |person| %>
+						<% p.car_owners.each do |person| %>
 						<td data-car="<%= person.try(:car).try(:id) %>" data-place="<%= p.id %>">
 							<strong><%= person and t('.person_car', :name => person.name) or t('.unclaimed') %></strong>
                             <%=t '.seats_left', :count => person.car.seats_left(p) if person %>

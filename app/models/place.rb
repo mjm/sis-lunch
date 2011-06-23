@@ -29,7 +29,7 @@ class Place < ActiveRecord::Base
   end
   
   def car_owners
-    people.select(&:has_car?)
+    people.select(&:has_car?) + (votes_for_car(nil).empty? and [] or [nil])
   end
 
   def votes_for_car(car)
