@@ -13,6 +13,8 @@ gem 'uglifier'
 
 gem 'jquery-rails'
 
+gem 'rdiscount'
+
 # Use unicorn as the web server
 # gem 'unicorn'
 

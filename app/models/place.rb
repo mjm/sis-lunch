@@ -1,3 +1,5 @@
+require 'rdiscount'
+
 class Place < ActiveRecord::Base
   validates :name, :presence => true, :uniqueness => true
   
@@ -7,6 +9,10 @@ class Place < ActiveRecord::Base
   has_many :people, :through => :votes
   
   before_validation { write_attribute :name, name.strip }
+  
+  def formatted_notes
+  	notes and Markdown.new(notes).to_html.html_safe or ""
+  end
   
   def vote_for(person)
     votes.detect {|v| v.person == person }

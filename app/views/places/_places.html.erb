@@ -9,6 +9,7 @@
 		</td>
 		<td>
 			<span class="place-name"><%= p.name %></span> <%=t '.added_by', :name => p.person.name %>
+			<%= p.formatted_notes %>
 			<% if p.leaving_at %>
 			<p class="place-time"><%=t '.leaving_at' %> <%= p.leaving_at.to_s(:time) %></p>
 			<% end %>

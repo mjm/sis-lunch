@@ -1,5 +1,6 @@
 <%= form_for place, :remote => true do |f| -%>
-	<%= f.text_field :name, disabled: !place.new_record? %><br/>
+	<%= f.text_field :name, disabled: !place.new_record?, placeholder: Place.human_attribute_name(:name) %><br/>
+	<%= f.text_area :notes, rows: 6, placeholder: Place.human_attribute_name(:notes) %><br/>
 	<%= f.label :leaving_at %>:
 	<input id="place_leaving_at_1i" name="place[leaving_at(1i)]" type="hidden" value="" />
 	<input id="place_leaving_at_2i" name="place[leaving_at(2i)]" type="hidden" />
