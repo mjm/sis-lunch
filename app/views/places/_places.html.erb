@@ -25,12 +25,12 @@
 				<% else %>
 				<table class="car-seats">
 					<tr>
-						<% p.car_owners.each do |person| %>
+						<% p.car_owners.each do |person, votes| %>
 						<td data-car="<%= person.try(:car).try(:id) %>" data-place="<%= p.id %>">
 							<strong><%= person and t('.person_car', :name => person.name) or t('.unclaimed') %></strong>
                             <%=t '.seats_left', :count => person.car.seats_left(p) if person %>
 							<ul>
-                                <% p.votes_for_car(person.try(:car)).each do |vote| %>
+                                <% votes.each do |vote| %>
                                 <li class="<%= "mine" if vote.person == @current_user %>"
                                     data-vote="<%= vote.id %>"
                                     data-place="<%= p.id %>">

@@ -11,25 +11,28 @@ class Place < ActiveRecord::Base
   before_validation { write_attribute :name, name.strip }
   
   def formatted_notes
-  	notes and Markdown.new(notes).to_html.html_safe or ""
+    notes and Markdown.new(notes).to_html.html_safe or ""
   end
   
   def vote_for(person)
     votes.detect {|v| v.person == person }
   end
   
-  def num_seats
-    people.inject(0) do |seats, p|
-      if p.has_car?
-        seats + p.car.seats
-      else
-        seats
-      end
-    end 
-  end
-  
   def car_owners
-    people.select(&:has_car?) + (votes_for_car(nil).empty? and [] or [nil])
+    owners = {}
+    people.select(&:has_car?).each do |person|
+      owners[person] = []
+    end
+    owners[nil] = []
+    
+    votes.each do |vote|
+    	car_owner = vote.car.try(:person)
+    	car_owner = nil unless owners.has_key? car_owner
+    	owners[car_owner] << vote
+    end
+    
+    owners.delete(nil) if owners[nil].empty?
+  	owners
   end
 
   def votes_for_car(car)
