@@ -3,6 +3,7 @@ class VotesController < ApplicationController
   before_filter :login_required
   
   def create
+    Vote.destroy_all(:person_id => @current_user.id)
     @vote = Vote.create(:person => session[:user], :place_id => params[:place])
     @places = Place.all
   end
