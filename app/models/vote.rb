@@ -1,7 +1,7 @@
 class SeatCountValidator < ActiveModel::EachValidator
   def validate_each(record, attribute, value)
     if value and value.seats_left(record.place) < 1
-      record.errors.add attribute, "has no more seats available."
+      record.errors.add attribute, "has no more seats available." #TODO i18n
     end
   end
 end

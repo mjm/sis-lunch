@@ -56,12 +56,24 @@ en:
         have_car: I have a car.
         seats_html: "I have %{field} seats total."
   activerecord:
+    errors:
+      models:
+        car:
+          attributes:
+            seats:
+              inclusion: "must be between 1 and 10."
+        vote:
+          attributes:
+            person_id:
+              taken: "You have already voted for a different place."
     attributes:
       place:
         leaving_at: "Leave at"
         walkable: "Walking distance"
       person:
         password_confirmation: Confirm
+      vote:
+        person_id: ""
   helpers:
     submit:
       person:

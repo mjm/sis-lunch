@@ -5,7 +5,6 @@ class VotesController < ApplicationController
   def create
     @vote = Vote.create(:person => session[:user], :place_id => params[:place])
     @places = Place.all
-    respond_with(@vote)
   end
 
   def update
@@ -20,6 +19,5 @@ class VotesController < ApplicationController
     @vote = Vote.find(params[:id])
     @vote.destroy
     @places = Place.all
-    respond_with(@vote)
   end
 end
