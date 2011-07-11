@@ -22,7 +22,9 @@ class CarsController < ApplicationController
       
       if params[:has_car]
         @current_car.seats = params[:car][:seats]
-        @current_car.save
+        unless @current_car.save
+          @current_user.update_attribute :has_car, false
+        end
       elsif @current_car
         @current_car.destroy
       end
