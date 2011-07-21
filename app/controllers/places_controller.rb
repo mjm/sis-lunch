@@ -3,19 +3,19 @@ class PlacesController < ApplicationController
   before_filter :login_required
   
   def index
-    @places = Place.all
+    @places = @current_user.group.places
     @place = Place.new
     respond_with(@places)
   end
   
   def periodic
-    @places = Place.all
+    @places = @current_user.group.places
     render :partial => 'places'
   end
   
   def create
-    @place = Place.create(params[:place].merge(:person => session[:user]))
-    @places = Place.all
+    @place = Place.create(params[:place].merge(:person => @current_user))
+    @places = @current_user.group.places
   end
   
   def edit
@@ -27,11 +27,11 @@ class PlacesController < ApplicationController
     @place.attributes = params[:place]
     @place.save
     
-    @places = Place.all
+    @places = @current_user.group.places
   end
   
   def destroy
-    @place = Place.first(:conditions => {:id => params[:id], :person_id => session[:user]})
+    @place = Place.first(:conditions => {:id => params[:id], :person_id => @current_user})
     @place.destroy
     respond_with(@place)
   end
