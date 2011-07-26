@@ -13,6 +13,10 @@
 		<h1><%= link_to "#{@current_user and @current_user.group.name or ""} #{t ".title"}", places_path %></h1>
 	</div>
 	
+	<div id="feedback">
+	    <a href="https://github.com/mjm/sis-lunch/issues/new">submit feedback</a>
+	</div>
+	
 	<div id="messages">
 		<p class="ui-state-error" style="<%= 'display:none' unless flash.key?(:error) %>">
 			<span class="ui-icon ui-icon-alert"></span>

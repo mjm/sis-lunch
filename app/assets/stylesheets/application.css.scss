@@ -51,6 +51,22 @@ body {
 	}
 }
 
+#feedback {
+    position: fixed;
+    
+    bottom: 0px;
+    right: 10px;
+    width: 400px;
+    height: 30px;
+    z-index: 5000;
+    
+    text-align: right;
+    
+    a {
+	    color: #0073ea;
+    }
+}
+
 #container {
 	margin-top: 45px;
 	padding: 20px;
