@@ -1,6 +1,8 @@
 require 'rdiscount'
 
 class Place < ActiveRecord::Base
+  default_scope order('created_at')
+  
   validates :name, :presence => true, :uniqueness => true
   
   belongs_to :person
