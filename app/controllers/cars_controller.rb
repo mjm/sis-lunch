@@ -2,7 +2,7 @@ class CarsController < ApplicationController
   before_filter :login_required
   
   respond_to :html, :js
-  
+  atsatsr
   def edit
     @car = session[:user].car || Car.new
   end
