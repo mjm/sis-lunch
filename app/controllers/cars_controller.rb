@@ -4,7 +4,7 @@ class CarsController < ApplicationController
   respond_to :html, :js
   
   def edit
-    @car = session[:user].car || Car.new
+    @car = @current_user.car || Car.new
   end
   
   def create

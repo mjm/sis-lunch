@@ -4,7 +4,7 @@ class VotesController < ApplicationController
   
   def create
     Vote.destroy_all(:person_id => @current_user.id)
-    @vote = Vote.create(:person => session[:user], :place_id => params[:place])
+    @vote = Vote.create(:person => @current_user, :place_id => params[:place])
     @places = Place.all
   end
 
