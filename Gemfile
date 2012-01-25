@@ -5,8 +5,6 @@ gem 'rails', '3.2.0'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-gem 'sqlite3'
-
 gem 'sass'
 gem 'coffee-script'
 gem 'uglifier'
@@ -43,6 +41,9 @@ group :test do
   gem 'turn', :require => false
 end
 
+group :development, :test do
+    gem 'sqlite3'
+end
 group :production do
   gem 'therubyracer-heroku', '0.8.1.pre3'
   gem 'pg'
