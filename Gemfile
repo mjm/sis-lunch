@@ -13,6 +13,8 @@ gem 'jquery-rails'
 
 gem 'rdiscount'
 
+gem 'thin'
+
 # Use unicorn as the web server
 # gem 'unicorn'
 
@@ -42,10 +44,9 @@ group :test do
 end
 
 group :development, :test do
-    gem 'sqlite3'
+  gem 'sqlite3'
 end
 group :production do
-  gem 'therubyracer-heroku', '0.8.1.pre3'
   gem 'pg'
 end
 
