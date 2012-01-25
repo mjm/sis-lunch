@@ -15,7 +15,7 @@ class PeopleController < ApplicationController
         @person.save
       end
       
-      session[:user] = @person
+      session[:user_id] = @person.id
       respond_with(@person, :location => places_url)
     else
       render :new
@@ -24,10 +24,11 @@ class PeopleController < ApplicationController
   
   def login
     if request.post?
-      session[:user] = Person.authenticate(params[:name], params[:password])
-      if session[:user]
-        session[:user].login_ip = request.remote_ip
-        session[:user].save
+      @current_user = Person.authenticate(params[:name], params[:password])
+      if @current_user
+        session[:user_id] = @current_user.id
+        @current_user.login_ip = request.remote_ip
+        @current_user.save
         redirect_to places_url
       else
         flash.now[:error] = t('people.login.failed')
@@ -36,7 +37,7 @@ class PeopleController < ApplicationController
   end
   
   def logout
-    session[:user] = nil
+    session[:user_id] = nil
     redirect_to login_url
   end
 end
