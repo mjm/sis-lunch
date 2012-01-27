@@ -10,6 +10,8 @@ en:
       failed: Your username or password was incorrect. Please try again.
     new:
       heading: Sign up to vote
+    edit:
+      heading: Edit profile
   cars:
     save:
       success: Your car settings have been saved.
@@ -78,6 +80,7 @@ en:
     submit:
       person:
         create: "Sign Up"
+        update: Save Changes
       car:
         create: Save Car
         update: Save Car

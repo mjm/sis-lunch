@@ -1,5 +1,6 @@
 class PeopleController < ApplicationController
   respond_to :html
+  before_filter :login_required, only: [:edit, :update]
   
   def new
     @person = Person.new
@@ -22,9 +23,23 @@ class PeopleController < ApplicationController
     end
   end
   
+  def edit
+  end
+  
+  def update
+    raise "Cannot update another user's profile" if params[:id].to_i != @current_user.id
+    
+    @current_user.attributes = params[:person]
+    if @current_user.save
+      respond_with(@current_user, :location => places_url)
+    else
+      render :edit
+    end
+  end
+  
   def login
     if request.post?
-      @current_user = Person.authenticate(params[:name], params[:password])
+      @current_user = Person.find_by_name(params[:name]).try(:authenticate, params[:password])
       if @current_user
         session[:user_id] = @current_user.id
         @current_user.login_ip = request.remote_ip

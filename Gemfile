@@ -14,6 +14,7 @@ gem 'jquery-rails'
 gem 'rdiscount'
 
 gem 'thin'
+gem 'bcrypt-ruby'
 
 # Use unicorn as the web server
 # gem 'unicorn'

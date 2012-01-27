@@ -10,6 +10,7 @@ Lunch::Application.routes.draw do
   
   match 'login' => 'people#login', :as => :login
   match 'logout' => 'people#logout', :as => :logout
+  match 'profile' => 'people#edit', :as => :profile
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
