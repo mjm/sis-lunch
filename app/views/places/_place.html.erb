@@ -2,9 +2,9 @@
 	<%= f.text_field :name, disabled: !place.new_record?, placeholder: Place.human_attribute_name(:name) %><br/>
 	<%= f.text_area :notes, rows: 6, placeholder: Place.human_attribute_name(:notes) %><br/>
 	<%= f.label :leaving_at %>:
-	<input id="place_leaving_at_1i" name="place[leaving_at(1i)]" type="hidden" value="" />
-	<input id="place_leaving_at_2i" name="place[leaving_at(2i)]" type="hidden" />
-	<input id="place_leaving_at_3i" name="place[leaving_at(3i)]" type="hidden" />
+	<input id="place_leaving_at_1i" name="place[leaving_at(1i)]" type="hidden" value="2000" />
+	<input id="place_leaving_at_2i" name="place[leaving_at(2i)]" type="hidden" value="1" />
+	<input id="place_leaving_at_3i" name="place[leaving_at(3i)]" type="hidden" value="1" />
 	<select id="place_leaving_at_4i" name="place[leaving_at(4i)]">
 		<option value=""<%= " selected" unless place.leaving_at %>></option>
 		<% (9..16).each do |i| %>
