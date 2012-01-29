@@ -9,13 +9,6 @@ class PeopleController < ApplicationController
   def create
     @person = Person.create(params[:person].merge(:signup_ip => request.remote_ip))
     if @person.valid?
-      # TODO clean up this stuff
-      g = Group.first
-      if g
-        @person.group = g
-        @person.save
-      end
-      
       session[:user_id] = @person.id
       respond_with(@person, :location => places_url)
     else

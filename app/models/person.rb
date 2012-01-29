@@ -1,5 +1,3 @@
-require 'digest'
-
 class Person < ActiveRecord::Base
   has_secure_password
   validates :password, presence: { on: :create }
@@ -15,4 +13,11 @@ class Person < ActiveRecord::Base
   validates :name, presence: true, uniqueness: true
   
   before_validation { write_attribute :name, name.strip }
+  
+  before_create :ensure_group
+  
+  private
+    def ensure_group
+      self.group = Group.first unless group
+    end
 end
