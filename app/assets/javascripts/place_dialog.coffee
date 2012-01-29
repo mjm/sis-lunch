@@ -35,7 +35,16 @@ createEditPlaceDialog = ->
     modal: true
     title: editDialog.attr('title')
     resizable: false
+
+createCommentDialog = ->
+  commentDialog = $('#comment-dialog')
+  commentDialog.dialog
+    autoOpen: false
+    modal: true
+    title: commentDialog.attr('title')
+    resizable: false
 	
 $(document).ready ->
-	createAddPlaceDialog()
-	createEditPlaceDialog()
+  createAddPlaceDialog()
+  createEditPlaceDialog()
+  createCommentDialog()

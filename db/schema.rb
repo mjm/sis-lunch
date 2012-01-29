@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120127200902) do
+ActiveRecord::Schema.define(:version => 20120128171840) do
 
   create_table "cars", :force => true do |t|
     t.integer   "person_id"
@@ -60,6 +60,7 @@ ActiveRecord::Schema.define(:version => 20120127200902) do
     t.timestamp "created_at"
     t.timestamp "updated_at"
     t.integer   "car_id"
+    t.string    "comment"
   end
 
 end

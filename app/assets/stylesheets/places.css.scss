@@ -4,7 +4,7 @@
 	font-size: 0.9em;
 	p {
 	   padding: 5px 0;
-   }
+  }
 	td {
 		vertical-align: top;
 		padding: 8px 5px 5px 5px;
@@ -28,18 +28,19 @@
 	}
 	
 	.car-seats {
-	    margin-top: 10px;
-	    margin-left: 10px;
-	    tr {
-	        background-color: #f8f8f8;
-	    }
-	    td {
-	        padding: 8px;
-	        border: 1px solid #dddddd;
-	    }
-	    .mine {
-	        cursor: pointer;
-	    }
+    margin-top: 10px;
+    margin-left: 10px;
+    tr {
+      background-color: #f8f8f8;
+    }
+    td {
+      line-height: 1.2em;
+      padding: 8px;
+      border: 1px solid #dddddd;
+    }
+    .mine {
+      cursor: pointer;
+    }
 	}
 	
 	.vote-button, .unvote-button {

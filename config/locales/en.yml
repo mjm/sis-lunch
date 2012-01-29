@@ -16,6 +16,8 @@ en:
     save:
       success: Your car settings have been saved.
   votes:
+    vote:
+      placeholder: Enter your comment here.
     create:
       success: "You have voted for '%{name}'."
     destroy:
@@ -26,6 +28,7 @@ en:
     index:
       add: Add a Place
       edit: Edit Place
+      comment: Comment on your Vote
     place:
       add: Add
     create:
@@ -34,9 +37,10 @@ en:
       success: "The place '%{name}' has been updated."
     destroy:
       success: "The place '%{name}' has been removed."
-    places:
+    place_row:
       vote: Vote
       unvote: Unvote
+      comment: Comment
       leaving_at: Leaving at
       added_by: "(added by %{name})"
       person_car: "%{name}'s Car"
@@ -87,3 +91,5 @@ en:
       place:
         create: Add
         update: Save
+      vote:
+        update: Save Comment

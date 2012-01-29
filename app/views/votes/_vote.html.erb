@@ -1,0 +1,4 @@
+<%= form_for @vote, :remote => true do |f| %>
+<%= f.text_area :comment, rows: 6, placeholder: t('.placeholder') %>
+<%= f.submit %>
+<% end %>

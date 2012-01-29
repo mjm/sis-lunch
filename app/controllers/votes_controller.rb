@@ -7,10 +7,14 @@ class VotesController < ApplicationController
     @vote = Vote.create(:person => @current_user, :place_id => params[:place])
     @places = Place.all
   end
+  
+  def edit
+    @vote = Vote.find(params[:id])
+  end
 
   def update
     @vote = Vote.find(params[:id])
-    @vote.car_id = params[:car_id]
+    @vote.attributes = params[:vote]
     @vote.save
 
     @places = Place.all

@@ -26,7 +26,7 @@ body {
 	}
 	a {
 		display: block;
-	    color: #0073ea;
+    color: #0073ea;
 		text-decoration: none;
 	}
 }
@@ -52,19 +52,19 @@ body {
 }
 
 #feedback {
-    position: fixed;
+  position: fixed;
     
-    bottom: 0px;
-    right: 10px;
-    width: 400px;
-    height: 30px;
-    z-index: 5000;
+  bottom: 0px;
+  right: 10px;
+  width: 400px;
+  height: 30px;
+  z-index: 5000;
     
-    text-align: right;
+  text-align: right;
     
-    a {
-	    color: #0073ea;
-    }
+  a {
+    color: #0073ea;
+  }
 }
 
 #container {
