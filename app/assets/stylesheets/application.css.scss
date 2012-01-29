@@ -13,7 +13,7 @@ body {
 	top: 0;
 	left: 0;
 	right: 0;
-	height: 45px;
+	height: 70px;
 	
 	background-color: #dddddd;
 	border-bottom: 1px solid #bbbbbb;
@@ -23,9 +23,17 @@ body {
 		margin: 0;
 		padding: 5px 5px 5px 10px;
 		font-size: 2em;
+    a {
+      margin-left: 0;
+    }
 	}
+  p {
+    margin-top: 5px;
+  }
 	a {
-		display: block;
+/*    display: block;*/
+    margin-left: 15px;
+    margin-right: 5px;
     color: #0073ea;
 		text-decoration: none;
 	}
@@ -68,7 +76,7 @@ body {
 }
 
 #container {
-	margin-top: 45px;
+	margin-top: 70px;
 	padding: 20px;
 }
 

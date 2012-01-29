@@ -11,6 +11,15 @@
 <body class="<%= @current_user and "logged-in" or "logged-out" %>">
 	<div id="header">
 		<h1><%= link_to "#{@current_user and @current_user.group.name or ""} #{t ".title"}", places_path %></h1>
+    <p>
+      <% if @current_user %>
+        <%= link_to t('.profile'), profile_url %>
+        <%= link_to t('.logout'), logout_url %>
+      <% else %>
+        <%= link_to t('.login'), login_url %>
+        <%= link_to t('.signup'), new_person_url %>
+      <% end %>
+    </p>
 	</div>
 	
 	<div id="feedback">

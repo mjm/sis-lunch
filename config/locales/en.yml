@@ -57,6 +57,10 @@ en:
   layouts:
     application:
       title: lunch
+      profile: Edit Profile
+      logout: Logout
+      login: Login
+      signup: Sign Up
       options:
         heading: Options
         have_car: I have a car.
