@@ -13,4 +13,11 @@ class Vote < ActiveRecord::Base
   
   validates :person_id, :uniqueness => true # TODO be able to store history
   validates :car, :seat_count => true
+  
+  before_create :assign_car_owner
+  
+  private
+    def assign_car_owner
+      self.car = person.car if person.has_car?
+    end
 end
