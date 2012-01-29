@@ -8,12 +8,12 @@
 
 <% @place_column = capture do %>
 	<span class="place-name">
-        <%= p.name %>
-    </span>
+    <%= p.name %>
+  </span>
     
-    <%=t '.added_by', :name => p.person.name %>
+  <%=t '.added_by', :name => p.person.name %>
 	
-    <%= p.formatted_notes %>
+  <%= p.formatted_notes %>
     
 	<% if p.leaving_at %>
 	<p class="place-time"><%=t '.leaving_at' %> <%= p.leaving_at.to_s(:time) %></p>
@@ -27,6 +27,7 @@
 			<% p.votes.each do |v| -%>
 			<li id="vote_<%=v.id%>">
 				<%= v.person.name %>
+        <%= vote_comment(v) %>
 			</li>
 			<% end %>
 		</ul>
@@ -35,21 +36,17 @@
 			<tr>
 				<% p.car_owners.each do |person, votes| %>
 				<td data-car="<%= person.try(:car).try(:id) %>" data-place="<%= p.id %>">
-					<strong><%= person and t('.person_car', :name => person.name) or t('.unclaimed') %></strong><br/>
-                    <%=t '.seats_left', :count => person.car.seats_left(p) if person %>
+          <strong><%= person and t('.person_car', :name => person.name) or t('.unclaimed') %></strong><br/>
+          <%=t '.seats_left', :count => person.car.seats_left(p) if person %>
 					<ul>
-                        <% votes.each do |vote| %>
-                        <li class="<%= "mine" if vote.person == @current_user %>"
-                            data-vote="<%= vote.id %>"
-                            data-place="<%= p.id %>">
-                            <%= vote.person.name %>
-							<% if vote.person == @current_user %>
-							<%= link_to t('.comment'), edit_vote_path(vote), remote: true, class: 'comment-button' %>
-                            <% elsif !vote.comment.blank? %>
-                            <span class="vote-comment ui-icon-comment ui-icon" title="<%=vote.comment%>"></span>
-							<% end %>
-                        </li>
-                        <% end %>
+            <% votes.each do |vote| %>
+              <li class="<%= "mine" if vote.person == @current_user %>"
+                  data-vote="<%= vote.id %>"
+                  data-place="<%= p.id %>">
+                <%= vote.person.name %>
+                <%= vote_comment(vote) %>
+              </li>
+            <% end %>
 					</ul>
 				</td>
 				<% end %>
@@ -60,15 +57,15 @@
 <% end %>
 
 <% @walking_column = capture do %>
-    <%= p.walkable? and t('.walking') or t('.driving') %>
+  <%= p.walkable? and t('.walking') or t('.driving') %>
 <% end %>
 
 <% @edit_column = capture do %>
-    <%= link_to t('.edit'), edit_place_path(p), remote: true, class: 'edit-button' if p.person == @current_user %>
+  <%= link_to t('.edit'), edit_place_path(p), remote: true, class: 'edit-button' if p.person == @current_user %>
 <% end %>
 
 <% @delete_column = capture do %>
-    <%= link_to t('.delete.text'), place_path(p), method: :delete, confirm: t('.delete.confirm'), remote: true, class: 'delete-button' if p.person == @current_user %>
+  <%= link_to t('.delete.text'), place_path(p), method: :delete, confirm: t('.delete.confirm'), remote: true, class: 'delete-button' if p.person == @current_user %>
 <% end %>
 
 <tr id="place_<%=p.id%>">
