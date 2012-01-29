@@ -2,9 +2,27 @@ blockUpdates = false
 
 window.setUpdatesEnabled = (enable) ->
   blockUpdates = not enable
+  
+updatePlaces = ->
+  if not blockUpdates
+    $.get '/periodic', (data) ->
+      $('#places')
+        .trigger('beforeupdate')
+        .html(data)
+        .trigger('update') if not blockUpdates
 
 $(document).ready ->
   $('#places').bind 'update', ->
+    $(this).find('.vote-comment').qtip
+      style:
+        classes: 'ui-tooltip-light ui-tooltip-shadow ui-tooltip-rounded'
+      events:
+        show: ->
+          blockUpdates = true
+        hide: ->
+          blockUpdates = false
+          true # returning false causes problems
+    
     $(this).find('.delete-button').button
       icons:
         primary: "ui-icon-closethick"
@@ -46,11 +64,4 @@ $(document).ready ->
 
   $('#places').trigger('update')
 
-  setInterval ->
-    if not blockUpdates
-      $.get '/periodic', (data) ->
-        $('#places')
-          .trigger('beforeupdate')
-          .html(data)
-          .trigger('update') if not blockUpdates
-  , 5000
+  setInterval updatePlaces, 5000
