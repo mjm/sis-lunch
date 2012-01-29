@@ -45,6 +45,8 @@
                             <%= vote.person.name %>
 							<% if vote.person == @current_user %>
 							<%= link_to t('.comment'), edit_vote_path(vote), remote: true, class: 'comment-button' %>
+                            <% elsif !vote.comment.blank? %>
+                            <span class="vote-comment ui-icon-comment ui-icon" title="<%=vote.comment%>"></span>
 							<% end %>
                         </li>
                         <% end %>
