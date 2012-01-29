@@ -1,5 +1,8 @@
 blockUpdates = false
 
+window.setUpdatesEnabled = (enable) ->
+  blockUpdates = not enable
+
 $(document).ready ->
   $('#places').bind 'update', ->
     $(this).find('.delete-button').button
