@@ -12,7 +12,6 @@ showNextMessage = ->
 		setTimeout showNextMessage, 4000
 
 showMessage = (elem, message) ->
-	console.log "Are we showing a message? #{showingMessage}"
 	messageQueue.push element: elem, text: message
 	if not showingMessage
 		showNextMessage()
