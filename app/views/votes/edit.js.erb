@@ -1,17 +1,12 @@
 (function() {
   this.html("<%= escape_javascript render(partial: 'vote', locals: {vote: @vote}) %>");
-  console.log("1");
   var submit = this.find('input:submit');
-  console.log("2");
   var form = this.find('form');
-  console.log("3");
   submit.hide();
-  console.log("4");
   this.dialog('option', 'buttons', [{
     text: submit.val(),
     click: function() {
       form.submit();
     }
   }]).dialog('open');
-  console.log("5");
 }).call($('#comment-dialog'));
