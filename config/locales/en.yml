@@ -25,6 +25,8 @@ en:
     update:
       success: "Your seat choice has been changed."
   places:
+    walking: Walking
+    driving: Driving
     index:
       add: Add a Place
       edit: Edit Place
@@ -48,8 +50,6 @@ en:
         one: '(1 seat left)'
         other: '(%{count} seats left)'
       unclaimed: No Car Chosen
-      walking: Walking
-      driving: Driving
       delete:
         text: 'Delete Place'
         confirm: 'Are you sure you want to delete this place? All votes will be lost.'

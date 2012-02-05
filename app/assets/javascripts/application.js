@@ -8,4 +8,4 @@
 //= require jquery_ujs
 //= require jquery-ui
 //= require jquery.qtip.min
-//= require_tree .
+//= require_tree ./application

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Lunch</title>
+    <%= stylesheet_link_tag "mobile" %>
+    <%= javascript_include_tag "mobile" %>
+    <%= csrf_meta_tags %>
+  </head>
+  <body id="jqt">
+    
+    <div id="places" class="current">
+      <div class="toolbar">
+        <h1>Places</h1>
+        <a href="#add-place" class="button add slideup">+</a>
+      </div>
+      <ul class="rounded">
+        <% @places.each do |p| %>
+        <li class="place" data-id="<%=p.id%>">
+          <a href="#place">
+            <small class="counter"><%= p.votes.count %></small>
+            <%= p.name %>
+            <small><%= p.walkable? and t('places.walking') or t('places.driving') %></small>
+          </a>
+        </li>
+        <% end %>
+      </ul>
+    </div>
+    
+    <div id="place">
+      <div class="toolbar">
+        <h1></h1>
+        <a class="back" href="#">Places</a>
+      </div>
+      <ul class="rounded">
+        <li class="notes"></li>
+      </ul>
+      <div class="votes">
+      </div>
+    </div>
+    
+    <%= form_tag places_url(format: 'json'), id: 'add-place' %>
+      <div class="toolbar">
+        <a class="save button" href="#">Save</a>
+        <h1>Add Place</h1>
+        <a class="cancel goback" href="#">Cancel</a>
+      </div>
+      <ul class="rounded">
+        <li><input name="place[name]" id="place_name" type="text" placeholder="Name" /></li>
+        <li><textarea name="place[notes]" id="place_notes" placeholder="Notes"></textarea></li>
+        <li><input name="place[walkable]" id="place_walkable" type="checkbox" title="Walking distance?" />
+      </ul>
+    </form>
+  </body>
+</html>

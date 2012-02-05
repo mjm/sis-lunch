@@ -1,11 +1,16 @@
 class PlacesController < ApplicationController
-  respond_to :html, :js
+  respond_to :html, :js, :json
   before_filter :login_required
   
   def index
     @places = @current_user.group.places
     @place = Place.new
-    respond_with(@places)
+    respond_with @places
+  end
+  
+  def show
+    @place = @current_user.group.places.find(params[:id])
+    respond_with @place
   end
   
   def periodic
@@ -16,6 +21,8 @@ class PlacesController < ApplicationController
   def create
     @place = Place.create(params[:place].merge(:person => @current_user))
     @places = @current_user.group.places
+    
+    respond_with(@place)
   end
   
   def edit

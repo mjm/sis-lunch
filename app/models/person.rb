@@ -16,6 +16,10 @@ class Person < ActiveRecord::Base
   
   before_create :ensure_group
   
+  def as_json(options = nil)
+    super((options or {}).merge(except: :password_digest))
+  end
+  
   private
     def ensure_group
       self.group = Group.first unless group
