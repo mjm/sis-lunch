@@ -44,6 +44,8 @@ class Place < ActiveRecord::Base
   def as_json(options = nil)
     json = super
     
+    json['place']['vote_total'] = votes.count
+    
     if walkable?
       json['place']['votes'] = votes.as_json(include: :person, root: false)
     else

@@ -38,17 +38,17 @@
       </div>
     </div>
     
-    <%= form_tag places_url(format: 'json'), id: 'add-place' %>
+    <%= form_for Place.new, format: :json, html: { id: 'add-place' } do |f| -%>
       <div class="toolbar">
         <a class="save button" href="#">Save</a>
         <h1>Add Place</h1>
         <a class="cancel goback" href="#">Cancel</a>
       </div>
       <ul class="rounded">
-        <li><input name="place[name]" id="place_name" type="text" placeholder="Name" /></li>
-        <li><textarea name="place[notes]" id="place_notes" placeholder="Notes"></textarea></li>
-        <li><input name="place[walkable]" id="place_walkable" type="checkbox" title="Walking distance?" />
+        <li><%= f.text_field :name, placeholder: 'Name' %></li>
+        <li><%= f.text_area :notes, placeholder: 'Notes' %></textarea></li>
+        <li><%= f.check_box :walkable, title: 'Walking distance' %></li>
       </ul>
-    </form>
+    <% end %>
   </body>
 </html>
