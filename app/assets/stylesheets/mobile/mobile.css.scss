@@ -1,0 +1,23 @@
+#place {
+  li {
+    font-weight: normal;
+    color: black;
+  }
+  
+  .whiteButton {
+  
+  }
+}
+
+#places {
+  .place span {
+    display: inline-block;
+    padding-right: 100px;
+  }
+
+  .counter.current {
+    background-color: #DE5856;
+    color: white;
+    text-shadow: black 0px 1px 0px;
+  }
+}

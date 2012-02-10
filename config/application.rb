@@ -42,3 +42,7 @@ module Lunch
     config.assets.enabled = true
   end
 end
+
+Rabl.configure do |config|
+  config.include_json_root = false
+end

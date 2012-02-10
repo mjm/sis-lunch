@@ -16,6 +16,9 @@ gem 'rdiscount'
 gem 'thin'
 gem 'bcrypt-ruby'
 
+gem 'rabl'
+gem 'json'
+
 # Use unicorn as the web server
 # gem 'unicorn'
 

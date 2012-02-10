@@ -1,5 +1,7 @@
 require 'rdiscount'
 
+PlaceCar = Struct.new(:owner, :votes)
+
 class Place < ActiveRecord::Base
   default_scope order('created_at')
   
@@ -35,6 +37,14 @@ class Place < ActiveRecord::Base
     
     owners.delete(nil) if owners[nil].empty?
   	owners
+  end
+  
+  def cars
+    cars = []
+    car_owners.each do |p, v|
+      cars << PlaceCar.new(p, v)
+    end
+    cars
   end
 
   def votes_for_car(car)

@@ -15,6 +15,4 @@ $(document).ready ->
       dataType: 'json'
       success: (data) ->
         jQT.goBack()
-        # refresh things
-        # perhaps show the new place
     false
