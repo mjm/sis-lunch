@@ -38,6 +38,7 @@ en:
     update:
       success: "The place '%{name}' has been updated."
     destroy:
+      confirm: 'Are you sure you want to delete this place? All votes will be lost.'
       success: "The place '%{name}' has been removed."
     place_large:
       unvote_html: '<i class="icon-white icon-remove"></i> Leave'

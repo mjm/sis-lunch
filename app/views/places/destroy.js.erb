@@ -1,2 +1,5 @@
-$('#place_<%=@place.id%>').remove();
+$('#places')
+	.trigger('beforeupdate')
+	.html('<%= escape_javascript(render :partial => "places") %>')
+	.trigger('update');
 <%= js_notice t('.success', :name => @place.name) %>

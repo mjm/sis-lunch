@@ -42,6 +42,9 @@ class PlacesController < ApplicationController
   def destroy
     @place = Place.first(:conditions => {:id => params[:id], :person_id => @current_user})
     @place.destroy
+    
+    load_places_data
+    
     respond_with(@place)
   end
 
