@@ -47,6 +47,11 @@ createCommentDialog = ->
     resizable: false
 	
 $(document).ready ->
-  createAddPlaceDialog()
-  createEditPlaceDialog()
-  createCommentDialog()
+  $('#add-place').on 'show', (e) ->
+    $('#place_name').val ''
+    $('#place_notes').val ''
+    $('#place_walkable').removeAttr 'checked'
+    $('select', $(e.target)).val ''
+#  createAddPlaceDialog()
+#  createEditPlaceDialog()
+#  createCommentDialog()

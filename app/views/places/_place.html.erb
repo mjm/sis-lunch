@@ -1,10 +1,11 @@
+<%= form_for place, remote: true, html: {class: 'form-horizontal'} do |f| -%>
+
 <div class="modal-header">
   <a class="close" data-dismiss="modal">x</a>
   <h3>Add a New Place</h3>
 </div>
 
 <div class="modal-body">
-<%= form_for place, remote: true, html: {class: 'form-horizontal'} do |f| -%>
 
   <div class="control-group">
     <%= f.label :name, class: 'control-label' %>
@@ -36,10 +37,12 @@
       <%= f.time_select :leaving_at, {minute_step: 15, ampm: true}, {class: 'input-small'} %>
     </div>
   </div>
-<% end %>
+
 </div>
 
 <div class="modal-footer">
   <button class="btn" data-dismiss="modal">Cancel</button>
   <button class="btn btn-primary">Save Changes</button>
 </div>
+
+<% end %>
