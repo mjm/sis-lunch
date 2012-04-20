@@ -1,3 +1,11 @@
-<% @places.each do |p| -%>
-<%= render partial: 'places/place_row', locals: {p: p} %>
-<% end %>
+<div class="container-fluid">
+  <h2>Other Places</h2>
+
+  <% @places.in_groups_of(4, false).each do |group| -%>
+  <div class="row-fluid">
+    <% group.each do |p| %>
+    <%= render partial: 'place_cell', locals: {place: p} %>
+    <% end %>
+  </div>
+  <% end %>
+</div>

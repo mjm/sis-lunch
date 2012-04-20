@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120128171840) do
+ActiveRecord::Schema.define(:version => 20120420191724) do
 
   create_table "cars", :force => true do |t|
     t.integer   "person_id"
@@ -52,6 +52,7 @@ ActiveRecord::Schema.define(:version => 20120128171840) do
     t.integer   "person_id"
     t.time      "leaving_at"
     t.string    "notes"
+    t.integer   "votes_count"
   end
 
   create_table "votes", :force => true do |t|

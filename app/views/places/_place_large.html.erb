@@ -1,0 +1,94 @@
+<%
+icon = mine && 'star' || 'heart'
+desc = mine && 'Your Vote' || 'Most Popular Choice'
+%>
+
+<div class="span6">
+
+  <%###### PLACE NAME ######%>
+  <h2>
+    <i class="icon-<%= icon %>"></i>
+    <%= place.name %>
+    <small><%= desc %></small>
+  </h2>
+
+  <%= place.formatted_notes %>
+
+  <%###### PLACE DETAILS ######%>
+  <p>
+    <strong>Distance</strong>
+    <%= place.walkable? and t('.walking') or t('.driving') %>,
+    <strong>Added by</strong>
+    <%= place.person.name %>,
+    <strong>Leaving at</strong>
+    <%= place.leaving_at.to_s(:time) %>
+  </p>
+
+  <% if place.walkable? %>
+
+    <%###### WALKING PEOPLE ######%>
+    <h4>People</h4>
+    <p>
+      <% place.people.each do |person| %>
+        <% unless person.vote.comment.blank? %>
+          <a href="#" rel="tooltip" title="<%= person.vote.comment %>"><i class="icon-comment"></i></a>
+        <% else %>
+          <i class="icon-user"></i>
+        <% end %>
+        <%= person.name %>
+      <% end %>
+
+      <% if place.people.include? @current_user %>
+        <button class="btn btn-mini btn-danger">
+          <i class="icon-white icon-remove"></i>
+          Leave
+        </button>
+      <% else %>
+        <button class="btn btn-mini btn-primary">
+          <i class="icon-white icon-ok"></i>
+          Join
+        </button>
+      <% end %>
+    </p>
+
+  <% else %>
+
+    <%###### DRIVING PEOPLE ######%>
+    <div class="well container-fluid">
+      <div class="row-fluid">
+        <% place.car_owners.each do |owner, votes| %>
+        <div class="span3">
+          <h4>
+            <i class="icon-road"></i>
+            <%= owner.name %>
+          </h4>
+          <ul class="unstyled">
+            <% votes.each do |v| %>
+            <li>
+              <%= v.person.name %>
+              <% unless v.comment.blank? %>
+                <a href="#" rel="tooltip" title="<%= v.comment %>"><i class="icon-comment"></i></a>
+              <% end %>
+            </li>
+            <% end %>
+            <li>
+              <% if votes.include? @current_user.vote %>
+              <button class="btn btn-mini btn-danger">
+                <i class="icon-remove icon-white"></i>
+                Leave
+              </button>
+              <% else %>
+              <button class="btn btn-mini btn-primary">
+                <i class="icon-ok icon-white"></i>
+                Join
+              </button>
+              <% end %>
+            </li>
+          </ul>
+        </div>
+        <% end %>
+      </div>
+    </div>
+
+  <% end %>
+</div>

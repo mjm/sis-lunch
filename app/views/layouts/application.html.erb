@@ -2,30 +2,53 @@
 <html>
 <head>
   <title>Lunch</title>
-  <link type="text/css" href="/css/flick/jquery-ui-1.8.13.custom.css" rel="stylesheet" />
-
-  <%= stylesheet_link_tag "application" %>
-  <%= javascript_include_tag "application" %>
+  <link rel="stylesheet" type="text/css" href="/bootstrap/css/bootstrap.min.css" />
+  <link rel="stylesheet" type="text/css" href="/bootstrap/css/bootstrap-responsive.min.css" />
+  <%= stylesheet_link_tag "bootstrapped" %>
+  <%# stylesheet_link_tag "application" %>
+  <%# javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
 </head>
 <body class="<%= @current_user and "logged-in" or "logged-out" %>">
-	<div id="header">
-		<h1><%= link_to "#{@current_user and @current_user.group.name or ""} #{t ".title"}", places_path %></h1>
-    <p>
-      <% if @current_user %>
-        <%= link_to t('.profile'), profile_url %>
-        <%= link_to t('.logout'), logout_url %>
-      <% else %>
-        <%= link_to t('.login'), login_url %>
-        <%= link_to t('.signup'), new_person_url %>
-      <% end %>
-    </p>
-	</div>
-	
-	<div id="feedback">
-	    <a href="https://github.com/mjm/sis-lunch/issues/new">submit feedback</a>
-	</div>
-	
+  <div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+      <div class="container-fluid">
+        <%= link_to t('.title'), places_path, class: 'brand' %>
+
+        <% if @current_user %>
+        <ul class="nav">
+          <li>
+            <a href="#add-place" data-toggle="modal">
+              <i class="icon-plus icon-white"></i>
+              Add a New Place
+            </a>
+          </li>
+        </ul>
+
+        <ul class="nav pull-right">
+          <li>
+            <a data-toggle="modal" href="#options">
+              <i class="icon-white icon-cog"></i>
+              <%= t '.options.link' %>
+            </a>
+          </li>
+          <li class="divider-vertical"></li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              <i class="icon-white icon-user"></i> <%= @current_user.name %>
+              <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+              <li><%= link_to t('.profile'), profile_url %></li>
+              <li><%= link_to t('.logout'), logout_url %><li>
+            </ul>
+          </li>
+        </ul>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
 	<div id="messages">
 		<p class="ui-state-error" style="<%= 'display:none' unless flash.key?(:error) %>">
 			<span class="ui-icon ui-icon-alert"></span>
@@ -38,23 +61,34 @@
 	</div>
 
 	<div id="container">
-		<%= yield %>
+	  <%= yield %>
 	</div>
-	
+
 	<% if @current_user %>
-	<div id="options">
-		<h2><%=t '.options.heading' %></h2>
-		<%= form_for @current_car, :remote => true do |f| -%>
-		<p>
-			<%= check_box_tag :has_car, '1', @current_user.has_car? %> <%=t '.options.have_car' %>
-			<span id="seat_count">
-			    <%=t '.options.seats_html', :field => f.number_field(:seats, :size => 5, :step => 1, :in => 1..10) %>
-			</span>
-		</p>
-		<%= f.submit %>
-		<% end %>
+	<div id="options" class="modal fade">
+	  <div class="modal-header">
+	    <a class="close" data-dismiss="modal">x</a>
+	    <h3><%=t '.options.heading' %></h3>
+	  </div>
+	  <div class="modal-body">
+	    <%= form_for @current_car, remote: true, html: {class: 'form-horizontal'} do |f| -%>
+	    <label class="checkbox">
+	      <%= check_box_tag :has_car, '1', @current_user.has_car? %> <%= t '.options.have_car' %>
+	    </label>
+	    <label class="input-append">
+	      <%= t '.options.seats_html', :field => f.number_field(:seats, size: 5, step: 1, in: 1..10, class: 'input-mini') %>
+	    </label>
+	    <% end %>
+	  </div>
+	  <div class="modal-footer">
+      <button class="btn" data-dismiss="modal">Cancel</button>
+      <button class="btn btn-primary">Save Changes</button>
+	  </div>
 	</div>
 	<% end %>
 
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+  <script type="text/javascript" src="/bootstrap/js/bootstrap.min.js"></script>
+  <%= javascript_include_tag "bootstrapped" %>
 </body>
 </html>

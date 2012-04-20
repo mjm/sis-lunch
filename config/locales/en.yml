@@ -56,15 +56,16 @@ en:
       edit: Edit
   layouts:
     application:
-      title: lunch
+      title: Lunch
       profile: Edit Profile
       logout: Logout
       login: Login
       signup: Sign Up
       options:
-        heading: Options
+        link: Options
+        heading: Lunch Options
         have_car: I have a car.
-        seats_html: "I have %{field} seats total."
+        seats_html: "My car has %{field} <span class='add-on'>seats</span> total."
   activerecord:
     errors:
       models:
@@ -78,8 +79,9 @@ en:
               taken: "You have already voted for a different place."
     attributes:
       place:
-        leaving_at: "Leave at"
-        walkable: "Walking distance"
+        name: Place Name
+        leaving_at: "Leaving at"
+        walkable: "Distance"
       person:
         password_confirmation: Confirm
       vote:

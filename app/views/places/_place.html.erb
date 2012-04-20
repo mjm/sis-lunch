@@ -1,22 +1,45 @@
-<%= form_for place, :remote => true do |f| -%>
-	<%= f.text_field :name, disabled: !place.new_record?, placeholder: Place.human_attribute_name(:name) %><br/>
-	<%= f.text_area :notes, rows: 6, placeholder: Place.human_attribute_name(:notes) %><br/>
-	<%= f.label :leaving_at %>:
-	<input id="place_leaving_at_1i" name="place[leaving_at(1i)]" type="hidden" value="2000" />
-	<input id="place_leaving_at_2i" name="place[leaving_at(2i)]" type="hidden" value="1" />
-	<input id="place_leaving_at_3i" name="place[leaving_at(3i)]" type="hidden" value="1" />
-	<select id="place_leaving_at_4i" name="place[leaving_at(4i)]">
-		<option value=""<%= " selected" unless place.leaving_at %>></option>
-		<% (9..16).each do |i| %>
-		<option value="<%= i %>"<%= " selected" if place.leaving_at.try(:hour) == i %>><%= i.to_s.rjust(2, '0') %></option>
-		<% end %>
-	</select> :
-	<select id="place_leaving_at_5i" name="place[leaving_at(5i)]">
-		<option value=""<%= " selected" unless place.leaving_at %>></option>
-		<% [0, 15, 30, 45].each do |i| %>
-		<option value="<%= i %>"<%= " selected" if place.leaving_at.try(:min) == i %>><%= i.to_s.rjust(2, '0') %></option>
-		<% end %>
-	</select><br/>
-	<%= f.check_box :walkable %> <%= f.label :walkable %><br/>
-	<%= f.submit %>
+<div class="modal-header">
+  <a class="close" data-dismiss="modal">x</a>
+  <h3>Add a New Place</h3>
+</div>
+
+<div class="modal-body">
+<%= form_for place, remote: true, html: {class: 'form-horizontal'} do |f| -%>
+
+  <div class="control-group">
+    <%= f.label :name, class: 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :name, disabled: !place.new_record? %>
+    </div>
+  </div>
+  
+  <div class="control-group">
+    <%= f.label :notes, class: 'control-label' %>
+    <div class="controls">
+      <%= f.text_area :notes, rows: 4, class: 'span3' %>
+    </div>
+  </div>
+  
+  <div class="control-group">
+    <%= f.label :walkable, class: 'control-label' %>
+    <div class="controls">
+      <label class="checkbox">
+        <%= f.check_box :walkable %>
+        This place is within walking distance.
+      </label>
+    </div>
+  </div>
+  
+  <div class="control-group">
+    <%= f.label :leaving_at, class: 'control-label' %>
+    <div class="controls">
+      <%= f.time_select :leaving_at, {minute_step: 15, ampm: true}, {class: 'input-small'} %>
+    </div>
+  </div>
 <% end %>
+</div>
+
+<div class="modal-footer">
+  <button class="btn" data-dismiss="modal">Cancel</button>
+  <button class="btn btn-primary">Save Changes</button>
+</div>

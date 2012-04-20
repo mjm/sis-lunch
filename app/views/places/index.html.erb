@@ -1,17 +1,12 @@
-<div id="add-buttons">
-	<button id="add-place"><%=t '.add' %></button>
-
-	<div id="add-place-dialog">
-	<%= render :partial => 'place', :locals => {:place => @place} %>
-	</div>
+<div id="add-place" class="modal fade">
+  <%= render :partial => 'place', :locals => {:place => @new_place} %>
 </div>
 
-<div id="edit-place-dialog" title="<%=t '.edit' %>">
-	
+<div class="container-fluid">
+  <div class="row-fluid">
+    <%= render partial: 'place_large', locals: {place: @my_place, mine: true} %>
+    <%= render partial: 'place_large', locals: {place: @their_place, mine: false} %>
+  </div>
 </div>
 
-<div id="comment-dialog" title="<%=t '.comment' %>">
-	
-</div>
-
-<table id="places"><%= render :partial => 'places' %></table>
+<%= render :partial => 'places' %>

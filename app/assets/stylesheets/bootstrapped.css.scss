@@ -1,0 +1,30 @@
+body {
+  padding-top: 60px;
+  padding-bottom: 40px;
+}
+
+h2 [class^="icon-"] {
+  margin-top: 8px;
+}
+
+#container {
+ .span3 .well {
+    height: 160px;
+    margin-bottom: 0;
+    border-bottom: 0;
+    -webkit-border-bottom-left-radius: 0;
+    -webkit-border-bottom-right-radius: 0;
+  }
+
+  .nav-tabs > .active > a {
+    background-color: whiteSmoke;
+  }
+
+  .dl-horizontal dt {
+    width: 110px;
+  }
+
+  .dl-horizontal dd {
+    margin-left: 120px;
+  }
+}
