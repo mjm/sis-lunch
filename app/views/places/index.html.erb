@@ -2,11 +2,6 @@
   <%= render :partial => 'place', :locals => {:place => @new_place} %>
 </div>
 
-<div class="container-fluid">
-  <div class="row-fluid">
-    <%= render partial: 'place_large', locals: {place: @my_place, mine: true} %>
-    <%= render partial: 'place_large', locals: {place: @their_place, mine: false} %>
-  </div>
+<div id="places">
+  <%= render :partial => 'places' %>
 </div>
-
-<%= render :partial => 'places' %>

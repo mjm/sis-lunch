@@ -1,10 +1,22 @@
 <div class="container-fluid">
+  <div class="row-fluid">
+    <% if @my_place == @their_place %>
+      <div class="span3">&nbsp;</div>
+      <%= render partial: 'places/place_large', locals: {place: @their_place, mine: false} %>
+    <% else %>
+      <%= render partial: 'places/place_large', locals: {place: @my_place, mine: true} %>
+      <%= render partial: 'places/place_large', locals: {place: @their_place, mine: false} %>
+    <% end %>
+  </div>
+</div>
+
+<div class="container-fluid">
   <h2>Other Places</h2>
 
   <% @places.in_groups_of(4, false).each do |group| -%>
   <div class="row-fluid">
     <% group.each do |p| %>
-    <%= render partial: 'place_cell', locals: {place: p} %>
+    <%= render partial: 'places/place_cell', locals: {place: p} %>
     <% end %>
   </div>
   <% end %>

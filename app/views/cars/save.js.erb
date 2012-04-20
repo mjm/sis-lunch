@@ -1,5 +1,6 @@
 <% if @current_car.valid? %>
-<%= js_notice t('.success') %>
+  $('#options').modal('hide');
+  <%= js_notice t('.success') %>
 <% else %>
-<%= js_error @current_car %>
+  <%= js_error @current_car %>
 <% end %>

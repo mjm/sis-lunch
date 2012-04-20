@@ -39,6 +39,9 @@ en:
       success: "The place '%{name}' has been updated."
     destroy:
       success: "The place '%{name}' has been removed."
+    place_large:
+      unvote_html: '<i class="icon-white icon-remove"></i> Leave'
+      vote_html: '<i class="icon-white icon-ok"></i> Join'
     place_row:
       vote: Vote
       unvote: Unvote
@@ -92,8 +95,8 @@ en:
         create: "Sign Up"
         update: Save Changes
       car:
-        create: Save Car
-        update: Save Car
+        create: Save Changes
+        update: Save Changes
       place:
         create: Add
         update: Save

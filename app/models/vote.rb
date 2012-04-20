@@ -21,6 +21,6 @@ class Vote < ActiveRecord::Base
 
   private
     def assign_car_owner
-      self.car = person.car if person.has_car?
+      self.car ||= person.car if person.has_car?
     end
 end

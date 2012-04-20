@@ -3,7 +3,20 @@ icon = mine && 'star' || 'heart'
 desc = mine && 'Your Vote' || 'Most Popular Choice'
 %>
 
+<% if place %>
+
 <div class="span6">
+
+  <div class="btn-group pull-right">
+    <% if @current_user == place.person %>
+      <button class="btn btn-small">
+        <i class="icon-pencil"></i>
+      </button>
+    <% end %>
+    <% unless place.people.include? @current_user %>
+      <%= link_to '<i class="icon-ok"></i>'.html_safe, votes_path(:place => place), method: :post, remote: true, class: 'btn btn-small' %>
+    <% end %>
+  </div>
 
   <%###### PLACE NAME ######%>
   <h2>
@@ -19,9 +32,10 @@ desc = mine && 'Your Vote' || 'Most Popular Choice'
     <strong>Distance</strong>
     <%= place.walkable? and t('.walking') or t('.driving') %>,
     <strong>Added by</strong>
-    <%= place.person.name %>,
+    <%= place.person.name %><% if place.leaving_at %>,
     <strong>Leaving at</strong>
     <%= place.leaving_at.to_s(:time) %>
+    <% end %>
   </p>
 
   <% if place.walkable? %>
@@ -39,15 +53,9 @@ desc = mine && 'Your Vote' || 'Most Popular Choice'
       <% end %>
 
       <% if place.people.include? @current_user %>
-        <button class="btn btn-mini btn-danger">
-          <i class="icon-white icon-remove"></i>
-          Leave
-        </button>
+        <%= link_to t('.unvote_html'), vote_path(place.vote_for(@current_user)), method: :delete, remote: true, class: 'btn btn-mini btn-danger' %>
       <% else %>
-        <button class="btn btn-mini btn-primary">
-          <i class="icon-white icon-ok"></i>
-          Join
-        </button>
+        <%= link_to t(".vote_html"), votes_path(:place => place), method: :post, remote: true, class: 'btn btn-mini btn-primary' %>
       <% end %>
     </p>
 
@@ -73,15 +81,9 @@ desc = mine && 'Your Vote' || 'Most Popular Choice'
             <% end %>
             <li>
               <% if votes.include? @current_user.vote %>
-              <button class="btn btn-mini btn-danger">
-                <i class="icon-remove icon-white"></i>
-                Leave
-              </button>
+                <%= link_to t('.unvote_html'), vote_path(place.vote_for(@current_user)), method: :delete, remote: true, class: 'btn btn-mini btn-danger' %>
               <% else %>
-              <button class="btn btn-mini btn-primary">
-                <i class="icon-ok icon-white"></i>
-                Join
-              </button>
+                <%= link_to t(".vote_html"), votes_path(:place => place, :car => owner.car), method: :post, remote: true, class: 'btn btn-mini btn-primary' %>
               <% end %>
             </li>
           </ul>
@@ -92,3 +94,11 @@ desc = mine && 'Your Vote' || 'Most Popular Choice'
 
   <% end %>
 </div>
+
+<% elsif mine %>
+
+<div class="span6">
+  <h2>You're not going to lunch. SUCK IT</h2>
+</div>
+
+<% end %>

@@ -3,13 +3,7 @@ class PlacesController < ApplicationController
   before_filter :login_required
 
   def index
-    @places = @current_user.group.places.order('votes_count desc').to_a
-
-    @my_place = @current_user.place
-    @their_place = Place.most_popular
-
-    @places.delete(@my_place)
-    @places.delete(@their_place)
+    load_places_data
 
     @new_place = Place.new
     respond_with @places
@@ -21,13 +15,14 @@ class PlacesController < ApplicationController
   end
 
   def periodic
-    @places = @current_user.group.places
+    load_places_data
+
     render :partial => 'places'
   end
 
   def create
     @place = Place.create(params[:place].merge(:person => @current_user))
-    @places = @current_user.group.places
+    load_places_data
 
     respond_with(@place)
   end
@@ -41,7 +36,7 @@ class PlacesController < ApplicationController
     @place.attributes = params[:place]
     @place.save
 
-    @places = @current_user.group.places
+    load_places_data
   end
 
   def destroy
@@ -49,6 +44,5 @@ class PlacesController < ApplicationController
     @place.destroy
     respond_with(@place)
   end
-
 
 end

@@ -2,16 +2,17 @@
   <div class="tabbable tabs-below">
     <div class="well">
 
-      <div class="btn-group pull-right">
-        <% if @current_user == place.person %>
-          <button class="btn btn-small">
-            <i class="icon-pencil"></i>
-          </button>
-        <% end %>
-        <button class="btn btn-small">
-          <i class="icon-ok"></i>
+    <div class="btn-group pull-right">
+      <%= link_to '<i class="icon-ok"></i>'.html_safe, votes_path(:place => place), method: :post, remote: true, class: 'btn btn-mini' %>
+      <% if @current_user == place.person %>
+        <button class="btn btn-mini">
+          <i class="icon-pencil"></i>
         </button>
-      </div>
+        <button class="btn btn-mini btn-danger">
+          <i class="icon-remove icon-white"></i>
+        </button>
+      <% end %>
+    </div>
 
       <h3><%= place.name %></h3>
       <%= place.formatted_notes %>

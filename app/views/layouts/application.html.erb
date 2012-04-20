@@ -5,8 +5,6 @@
   <link rel="stylesheet" type="text/css" href="/bootstrap/css/bootstrap.min.css" />
   <link rel="stylesheet" type="text/css" href="/bootstrap/css/bootstrap-responsive.min.css" />
   <%= stylesheet_link_tag "bootstrapped" %>
-  <%# stylesheet_link_tag "application" %>
-  <%# javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
 </head>
 <body class="<%= @current_user and "logged-in" or "logged-out" %>">
@@ -66,29 +64,29 @@
 
 	<% if @current_user %>
 	<div id="options" class="modal fade">
+	  <%= form_for @current_car, remote: true, html: {class: 'form-horizontal'} do |f| -%>
 	  <div class="modal-header">
 	    <a class="close" data-dismiss="modal">x</a>
 	    <h3><%=t '.options.heading' %></h3>
 	  </div>
 	  <div class="modal-body">
-	    <%= form_for @current_car, remote: true, html: {class: 'form-horizontal'} do |f| -%>
 	    <label class="checkbox">
 	      <%= check_box_tag :has_car, '1', @current_user.has_car? %> <%= t '.options.have_car' %>
 	    </label>
-	    <label class="input-append">
+	    <label class="input-append" id="seat_count">
 	      <%= t '.options.seats_html', :field => f.number_field(:seats, size: 5, step: 1, in: 1..10, class: 'input-mini') %>
 	    </label>
-	    <% end %>
 	  </div>
 	  <div class="modal-footer">
       <button class="btn" data-dismiss="modal">Cancel</button>
-      <button class="btn btn-primary">Save Changes</button>
+      <%= f.submit class: 'btn btn-primary' %>
 	  </div>
+    <% end %>
 	</div>
 	<% end %>
 
   <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
   <script type="text/javascript" src="/bootstrap/js/bootstrap.min.js"></script>
-  <%= javascript_include_tag "bootstrapped" %>
+  <%= javascript_include_tag "application" %>
 </body>
 </html>
