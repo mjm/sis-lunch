@@ -1,12 +1,4 @@
 (function() {
   this.html("<%= escape_javascript render(partial: 'place', locals: {place: @place}) %>");
-  var submit = this.find('input:submit');
-  var form = this.find('form');
-  submit.hide();
-  this.dialog('option', 'buttons', [{
-    text: submit.val(),
-    click: function() {
-      form.submit();
-    }
-  }]).dialog('open');
-}).call($('#edit-place-dialog'));
+  this.modal()
+}).call($('#edit-place'));

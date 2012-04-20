@@ -3,7 +3,7 @@ $('#places')
 	.trigger('beforeupdate')
 	.html('<%= escape_javascript(render :partial => "places") %>')
 	.trigger('update');
-$('#edit-place-dialog').dialog('close');
+$('#edit-place').modal('hide');
 <%= js_notice t('.success', :name => @place.name) %>
 <% else %>
 <%= js_error @place %>

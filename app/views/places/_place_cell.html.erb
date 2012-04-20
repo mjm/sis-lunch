@@ -5,9 +5,7 @@
     <div class="btn-group pull-right">
       <%= link_to '<i class="icon-ok"></i>'.html_safe, votes_path(:place => place), method: :post, remote: true, class: 'btn btn-mini' %>
       <% if @current_user == place.person %>
-        <button class="btn btn-mini">
-          <i class="icon-pencil"></i>
-        </button>
+        <%= link_to '<i class="icon-pencil"></i>'.html_safe, edit_place_path(place), remote: true, class: 'btn btn-mini' %>
         <button class="btn btn-mini btn-danger">
           <i class="icon-remove icon-white"></i>
         </button>
