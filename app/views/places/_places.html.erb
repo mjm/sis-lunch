@@ -1,3 +1,5 @@
+<% if @their_place %>
+
 <div class="container-fluid">
   <div class="row-fluid">
     <% if @my_place == @their_place %>
@@ -21,3 +23,26 @@
   </div>
   <% end %>
 </div>
+
+<% else %>
+
+<div class="container-fluid">
+  <div class="row-fluid">
+
+    <div class="span3">&nbsp;</div>
+    <div class="no-vote span6">
+      <p>No one has suggested a place yet!</p>
+      <p class="subtext">
+        Why don't you
+        <a href="#add-place" data-toggle="modal" class="btn btn-mini">
+          <i class="icon-plus"></i>
+          add a new place
+        </a>
+        ?
+      </p>
+    </div>
+
+  </div>
+</div>
+
+<% end %>
