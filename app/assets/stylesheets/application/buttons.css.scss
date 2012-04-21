@@ -1,7 +1,0 @@
-@mixin button {
-	font-size: 11px !important;
-}
-
-.delete-button, .edit-button, .vote-button, .unvote-button, #add-place, input[type=submit], button {
-	@include button;
-}

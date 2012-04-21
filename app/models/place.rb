@@ -55,21 +55,4 @@ class Place < ActiveRecord::Base
     votes.select {|v| v.car == car }
   end
 
-  def as_json(options = nil)
-    json = super
-
-    json['place']['vote_total'] = votes.count
-
-    if walkable?
-      json['place']['votes'] = votes.as_json(include: :person, root: false)
-    else
-      json['place']['cars'] = []
-      car_owners.each do |p, v|
-        json['place']['cars'] << {'owner' => p.as_json(root: false), 'votes' => v.as_json(include: :person, root: false)}
-      end
-    end
-
-    json
-  end
-
 end
