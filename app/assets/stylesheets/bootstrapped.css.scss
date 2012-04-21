@@ -7,6 +7,28 @@ h2 [class^="icon-"] {
   margin-top: 8px;
 }
 
+.label {
+  vertical-align: text-top;
+  display: inline-block;
+}
+
+h4 {
+  .label {
+    margin-top: 1px;
+  }
+
+  [class^="icon-"] {
+    margin-top: 1px;
+  }
+}
+
+p {
+  a.btn {
+    vertical-align: text-top;
+    margin-top: -2px;
+  }
+}
+
 #container {
  .span3 .well {
     height: 160px;
@@ -31,4 +53,17 @@ h2 [class^="icon-"] {
 
 .modal form {
   margin-bottom: 0;
+}
+
+.no-vote {
+  padding: 50px 0;
+
+  p {
+    text-align: center;
+    font-size: 20px;
+    &.subtext {
+      font-size: 14px;
+      color: #666;
+    }
+  }
 }

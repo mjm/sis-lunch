@@ -66,27 +66,12 @@ desc = mine && 'Your Vote' || 'Most Popular Choice'
       <div class="row-fluid">
         <% place.car_owners.each do |owner, votes| %>
         <div class="span3">
-          <h4>
-            <i class="icon-road"></i>
-            <%= owner.name %>
-          </h4>
-          <ul class="unstyled">
-            <% votes.each do |v| %>
-            <li>
-              <%= v.person.name %>
-              <% unless v.comment.blank? %>
-                <a href="#" rel="tooltip" title="<%= v.comment %>"><i class="icon-comment"></i></a>
-              <% end %>
-            </li>
-            <% end %>
-            <li>
-              <% if votes.include? @current_user.vote %>
-                <%= link_to t('.unvote_html'), vote_path(place.vote_for(@current_user)), method: :delete, remote: true, class: 'btn btn-mini btn-danger' %>
-              <% else %>
-                <%= link_to t(".vote_html"), votes_path(:place => place, :car => owner.car), method: :post, remote: true, class: 'btn btn-mini btn-primary' %>
-              <% end %>
-            </li>
-          </ul>
+          <%= car_list owner, votes %>
+          <% if votes.include? @current_user.vote %>
+            <%= link_to t('.unvote_html'), vote_path(place.vote_for(@current_user)), method: :delete, remote: true, class: 'btn btn-mini btn-danger' %>
+          <% else %>
+            <%= link_to t(".vote_html"), votes_path(:place => place, :car => owner.car), method: :post, remote: true, class: 'btn btn-mini btn-primary' %>
+          <% end %>
         </div>
         <% end %>
       </div>
@@ -97,8 +82,15 @@ desc = mine && 'Your Vote' || 'Most Popular Choice'
 
 <% elsif mine %>
 
-<div class="span6">
-  <h2>You're not going to lunch. SUCK IT</h2>
+<div class="span6 no-vote">
+  <p>You haven't chosen a place to eat yet!</p>
+  <p class="subtext">
+    Try clicking one of the
+    <a href="#" class="btn btn-mini">
+      <i class="icon-ok"></i>
+    </a>
+    Join buttons to choose a place to go.
+  </p>
 </div>
 
 <% end %>

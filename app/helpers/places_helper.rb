@@ -6,4 +6,8 @@ module PlacesHelper
       tag :span, {class: 'vote-comment ui-icon-comment ui-icon', title: vote.comment}, true
     end
   end
+  
+  def car_list(owner, votes)
+    render partial: 'places/car_list', locals: {owner: owner, votes: votes}
+  end
 end

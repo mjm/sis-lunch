@@ -33,7 +33,7 @@
         <% if place.walkable? %>
 
           <div class="tab-pane" id="people<%=place.id%>">
-            <h4><%= place.people.count %> people are going</h4>
+            <h4><%= pluralize(place.people.count, 'person is', 'people are') %> going</h4>
             <ul class="unstyled">
               <% place.people.each do |person| %>
               <li><%= person.name %></li>
@@ -45,20 +45,7 @@
 
           <% place.car_owners.each do |owner, votes| %>
             <div class="tab-pane" id="car<%=owner.id%>">
-              <h4>
-                <i class="icon-road"></i>
-                <%= owner.name %>
-
-                <% if owner %>
-                <span class="label"><%= owner.car.seats_left(place) %> left</span>
-                <% end %>
-              </h4>
-
-              <ul class="unstyled">
-                <% votes.each do |v| %>
-                <li><%= v.person.name %></li>
-                <% end %>
-              </ul>
+              <%= car_list owner, votes %>
             </div>
           <% end %>
 

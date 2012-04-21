@@ -35,13 +35,13 @@ ActiveRecord::Schema.define(:version => 20120420191724) do
   end
 
   create_table "people", :force => true do |t|
-    t.string   "name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.boolean  "has_car"
-    t.string   "signup_ip"
-    t.string   "login_ip"
-    t.string   "password_digest"
+    t.string    "name"
+    t.timestamp "created_at"
+    t.timestamp "updated_at"
+    t.boolean   "has_car"
+    t.string    "signup_ip"
+    t.string    "login_ip"
+    t.string    "password_digest"
   end
 
   create_table "places", :force => true do |t|
