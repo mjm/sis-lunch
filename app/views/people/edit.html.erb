@@ -1,23 +1,48 @@
-<div class="person-form">
+<div class="container-fluid">
+  <div class="row-fluid">
+    <div class="span3">&nbsp;</div>
+    <div class="person-form span6">
 
-<h1><%=t '.heading' %></h1>
+      <%= form_for @current_user, html: {class: 'form-horizontal'} do |f| -%>
+        <fieldset>
+          <legend><%=t '.heading' %></legend>
 
-<%= form_for @current_user do |f| -%>
-	<% unless @current_user.errors.empty? %>
-	<ul>
-		<% @current_user.errors.full_messages.each do |m| -%>
-			<li><%= m %></li>
-		<% end %>
-	</ul>
-	<% end %>
-	
-	<%= f.label :name %>
-	<%= f.text_field :name, :autofocus => true %>
-	<%= f.label :password %>
-	<%= f.password_field :password %>
-	<%= f.label :password_confirmation %>
-	<%= f.password_field :password_confirmation %>
-	<%= f.submit %>
-<% end %>
+          <% unless @current_user.errors.empty? %>
+          <div class="alert alert-error alert-block">
+            <h4 class="alert-heading">Your sign up was unsuccessful</h4>
+            <p>There were the following problems:</p>
+            <ul>
+              <% @current_user.errors.full_messages.each do |m| -%>
+              <li><%= m %></li>
+              <% end %>
+            </ul>
+          </div>
+          <% end %>
 
+          <div class="control-group">
+            <%= f.label :name, class: 'control-label' %>
+            <div class="controls">
+              <%= f.text_field :name, autofocus: true %>
+            </div>
+          </div>
+          <div class="control-group">
+            <%= f.label :password, class: 'control-label' %>
+            <div class="controls">
+              <%= f.password_field :password %>
+            </div>
+          </div>
+          <div class="control-group">
+            <%= f.label :password_confirmation, class: 'control-label' %>
+            <div class="controls">
+              <%= f.password_field :password_confirmation %>
+            </div>
+          </div>
+
+          <div class="form-actions">
+            <%= f.submit class: 'btn btn-primary btn-large' %>
+          </div>
+        </fieldset>
+      <% end %>
+    </div>
+  </div>
 </div>

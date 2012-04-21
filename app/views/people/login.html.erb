@@ -1,15 +1,29 @@
-<div class="person-form">
+<div class="container-fluid">
+  <div class="row-fluid">
+    <div class="span3">&nbsp;</div>
+    <div class="person-form span6">
 
-<h1><%=t '.heading' %></h1>
+      <form action="<%= login_url %>" method="post" class="form-horizontal">
+        <fieldset>
+          <legend><%=t '.heading' %> <small> <%=t '.signup_html', path: new_person_path %></small></legend>
+          <div class="control-group">
+            <%= label_tag :name, Person.human_attribute_name(:name), class: 'control-label' %>
+            <div class="controls">
+              <%= text_field_tag :name, '', autofocus: true %>
+            </div>
+          </div>
+          <div class="control-group">
+            <%= label_tag :password, Person.human_attribute_name(:password), class: 'control-label' %>
+            <div class="controls">
+              <%= password_field_tag :password %>
+            </div>
+          </div>
 
-<form action="<%= login_url %>" method="post">
-	<%= label_tag :name, Person.human_attribute_name(:name) %>
-	<%= text_field_tag :name, '', autofocus: true %>
-	<%= label_tag :password, Person.human_attribute_name(:password) %>
-	<%= password_field_tag :password %>
-	<%= submit_tag t(".submit") %>
-</form>
-
-<p><%=t '.signup_html', path: new_person_path %></p>
-
+          <div class="form-actions">
+            <%= submit_tag t(".submit"), class: 'btn btn-primary btn-large' %>
+          </div>
+        </fieldset>
+      </form>
+    </div>
+  </div>
 </div>
