@@ -14,8 +14,8 @@ desc = mine && 'Your Vote' || 'Most Popular Choice'
       <%= link_to '<i class="icon-comment"></i>'.html_safe, edit_vote_path(@current_user.vote), remote: true, class: 'btn btn-small' %>
     <% end %>
     <% if @current_user == place.person %>
-      <%= link_to '<i class="icon-pencil"></i>'.html_safe, edit_place_path(place), remote: true, class: 'btn btn-mini' %>
-      <%= link_to '<i class="icon-remove icon-white"></i>'.html_safe, place_path(place), method: :delete, confirm: t('places.destroy.confirm'), remote: true, class: 'btn btn-mini btn-danger' %>
+      <%= link_to '<i class="icon-pencil"></i>'.html_safe, edit_place_path(place), remote: true, class: 'btn btn-small' %>
+      <%= link_to '<i class="icon-remove icon-white"></i>'.html_safe, place_path(place), method: :delete, confirm: t('places.destroy.confirm'), remote: true, class: 'btn btn-small btn-danger' %>
     <% end %>
   </div>
 
