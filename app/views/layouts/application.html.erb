@@ -48,14 +48,14 @@
   </div>
 
 	<div id="messages">
-		<p class="ui-state-error" style="<%= 'display:none' unless flash.key?(:error) %>">
-			<span class="ui-icon ui-icon-alert"></span>
-			<span class="message"><%= flash[:error] %></span>
-		</p>
-		<p class="ui-state-highlight" style="display:none">
-			<span class="ui-icon ui-icon-info"></span>
-			<span class="message"></span>
-		</p>
+	  <div class="alert alert-error" style="<%= 'display:none' unless flash.key?(:error) %>">
+	    <a class="close" data-dismiss="alert">x</a>
+	    <span class="message"><%= flash[:error] %></span>
+	  </div>
+	  <div class="alert alert-success" style="display:none">
+	    <a class="close" data-dismiss="alert">x</a>
+	    <span class="message"></span>
+	  </div>
 	</div>
 
 	<div id="container">

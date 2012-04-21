@@ -8,3 +8,4 @@
 //= require bootstrapped
 //= require application/options
 //= require application/place_dialog
+//= require application/messages

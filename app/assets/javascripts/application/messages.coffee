@@ -17,7 +17,7 @@ showMessage = (elem, message) ->
 		showNextMessage()
 
 window.notice = (message) ->
-	showMessage $('#messages .ui-state-highlight'), message
+	showMessage $('#messages .alert-success'), message
 
 window.error = (message) ->
-	showMessage $('#messages .ui-state-error'), message
+	showMessage $('#messages .alert-error'), message
