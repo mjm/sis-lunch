@@ -1,6 +1,6 @@
 <%= form_for @vote, :remote => true do |f| %>
   <div class="modal-body">
-    <%= f.text_area :comment, rows: 6, placeholder: t('.placeholder') %>
+    <%= f.text_area :comment, rows: 6, placeholder: t('.placeholder'), autofocus: true %>
   </div>
   <div class="modal-footer">
     <button class="btn" data-dismiss="close">Cancel</button>

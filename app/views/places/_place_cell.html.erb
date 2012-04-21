@@ -1,4 +1,4 @@
-<div class="span3">
+<div class="span3 place-cell" id="place<%=place.id%>">
   <div class="tabbable tabs-below">
     <div class="well">
 
@@ -14,8 +14,8 @@
       <%= place.formatted_notes %>
 
       <div class="tab-content">
-
-        <div class="tab-pane active" id="info<%= place.id %>">
+        <% tab = "info#{place.id}" %>
+        <div class="tab-pane<%= tab_active place, tab %>" id="<%=tab%>">
           <dl class="dl-horizontal">
             <dt>Added by</dt>
             <dd><%= place.person.name %></dd>
@@ -32,7 +32,8 @@
 
         <% if place.walkable? %>
 
-          <div class="tab-pane" id="people<%=place.id%>">
+          <% tab = "people#{place.id}" %>
+          <div class="tab-pane<%= tab_active place, tab %>" id="<%=tab%>">
             <h4><%= pluralize(place.people.count, 'person is', 'people are') %> going</h4>
             <ul class="unstyled">
               <% place.people.each do |person| %>
@@ -44,7 +45,8 @@
         <% else %>
 
           <% place.car_owners.each do |owner, votes| %>
-            <div class="tab-pane" id="car<%=owner.id%>">
+            <% tab = "car#{owner.id}" %>
+            <div class="tab-pane<%= tab_active place, tab %>" id="<%=tab%>">
               <%= car_list owner, votes %>
             </div>
           <% end %>
@@ -55,15 +57,17 @@
     </div>
 
     <ul class="nav nav-tabs">
-      <li class="active">
-        <a href="#info<%=place.id%>" data-toggle="tab">
+      <% tab = "info#{place.id}" %>
+      <li class="<%= tab_active place, tab %>">
+        <a href="#<%=tab%>" data-toggle="tab">
           <i class="icon-info-sign"></i>
         </a>
       </li>
       <% if place.walkable? %>
 
-        <li>
-          <a href="#people<%=place.id%>" data-toggle="tab">
+        <% tab = "people#{place.id}" %>
+        <li class="<%= tab_active place, tab %>">
+          <a href="#<%=tab%>" data-toggle="tab">
             <span class="label label-inverse"><%= place.votes.count %></span>
             People
           </a>
@@ -71,7 +75,7 @@
 
       <% else %>
 
-        <li class="dropdown">
+        <li class="dropdown<%= car_active place %>">
           <a class="dropdown-toggle" data-toggle="dropdown" href="#">
             <i class="icon-road"></i>
             Drivers
@@ -80,8 +84,9 @@
 
           <ul class="dropdown-menu">
             <% place.car_owners.each do |owner, votes| %>
-            <li>
-              <a href="#car<%= owner.id %>" data-toggle="tab">
+            <% tab = "car#{owner.id}" %>
+            <li class="<%= tab_active place, tab %>">
+              <a href="#<%=tab%>" data-toggle="tab">
                 <span class="label label-info"><%= votes.size %></span>
                 <%= owner and owner.name or "Other" %>
               </a>
