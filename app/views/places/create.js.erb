@@ -1,8 +1,5 @@
 <% if @place.valid? %>
-$('#places')
-	.trigger('beforeupdate')
-	.html('<%= escape_javascript(render :partial => "places") %>')
-	.trigger('update');
+updatePlaces();
 $('#add-place').modal('hide');
 <%= js_notice t('.success', :name => @place.name) %>
 <% else %>

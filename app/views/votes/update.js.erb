@@ -1,7 +1,4 @@
-$('#places')
-	.trigger('beforeupdate')
-	.html('<%= escape_javascript(render :partial => "places/places") %>')
-	.trigger('update');
+updatePlaces();
 <% if @vote.valid? %>
 $('#comment').modal('hide');
 <%= js_notice t('.success') %>

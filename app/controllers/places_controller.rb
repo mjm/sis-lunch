@@ -22,8 +22,6 @@ class PlacesController < ApplicationController
 
   def create
     @place = Place.create(params[:place].merge(:person => @current_user))
-    load_places_data
-
     respond_with(@place)
   end
 
@@ -35,16 +33,12 @@ class PlacesController < ApplicationController
     @place = @current_user.places.find(params[:id])
     @place.attributes = params[:place]
     @place.save
-
-    load_places_data
   end
 
   def destroy
     @place = Place.first(:conditions => {:id => params[:id], :person_id => @current_user})
     @place.destroy
-    
-    load_places_data
-    
+
     respond_with(@place)
   end
 

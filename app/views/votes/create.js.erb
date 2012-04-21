@@ -1,8 +1,5 @@
 <% if @vote.valid? %>
-$('#places')
-	.trigger('beforeupdate')
-	.html('<%= escape_javascript(render partial: "places/places") %>')
-	.trigger('update');
+updatePlaces();
 <%= js_notice t('.success', :name => @vote.place.name) %>
 <% else %>
 <%= js_error @vote %>

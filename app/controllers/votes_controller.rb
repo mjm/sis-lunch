@@ -5,7 +5,6 @@ class VotesController < ApplicationController
   def create
     Vote.destroy_all(:person_id => @current_user.id)
     @vote = Vote.create(:person => @current_user, :place_id => params[:place], :car_id => params[:car])
-    load_places_data
 
     respond_with(@vote)
   end
@@ -19,16 +18,12 @@ class VotesController < ApplicationController
     @vote.attributes = params[:vote]
     @vote.save
 
-    load_places_data
-
     respond_with(@vote)
   end
 
   def destroy
     @vote = Vote.find(params[:id])
     @vote.destroy
-
-    load_places_data
 
     respond_with(@vote)
   end

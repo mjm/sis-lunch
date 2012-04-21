@@ -1,4 +1,5 @@
 <% if @current_car.valid? %>
+  updatePlaces();
   $('#options').modal('hide');
   <%= js_notice t('.success') %>
 <% else %>
