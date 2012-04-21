@@ -1,2 +1,3 @@
 $('#container').tooltip
-  selector: 'a[rel="tooltip"]'
+  selector: 'a[rel="tooltip"]',
+  placement: 'right'

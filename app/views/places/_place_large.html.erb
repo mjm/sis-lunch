@@ -15,6 +15,8 @@ desc = mine && 'Your Vote' || 'Most Popular Choice'
     <% end %>
     <% unless place.people.include? @current_user %>
       <%= link_to '<i class="icon-ok"></i>'.html_safe, votes_path(:place => place), method: :post, remote: true, class: 'btn btn-small' %>
+    <% else %>
+      <%= link_to '<i class="icon-comment"></i>'.html_safe, edit_vote_path(@current_user.vote), remote: true, class: 'btn btn-small' %>
     <% end %>
   </div>
 

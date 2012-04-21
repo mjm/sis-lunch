@@ -3,7 +3,7 @@ $('#places')
 	.html('<%= escape_javascript(render :partial => "places/places") %>')
 	.trigger('update');
 <% if @vote.valid? %>
-$('#comment-dialog').dialog('close');
+$('#comment').modal('hide');
 <%= js_notice t('.success') %>
 <% else %>
 <%= js_error @vote %>
