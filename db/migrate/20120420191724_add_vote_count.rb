@@ -1,6 +1,6 @@
 class AddVoteCount < ActiveRecord::Migration
   def change
-    add_column :places, :votes_count, :integer
+    add_column :places, :votes_count, :integer, :default => 0
 
     Place.reset_column_information
     Place.all.each do |p|
