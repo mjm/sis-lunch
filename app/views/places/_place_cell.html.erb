@@ -84,13 +84,13 @@
 
           <ul class="dropdown-menu">
             <% place.car_owners.each do |owner, votes| %>
-            <% tab = "car#{owner.id}" %>
-            <li class="<%= tab_active place, tab %>">
-              <a href="#<%=tab%>" data-toggle="tab">
-                <span class="label label-info"><%= votes.size %></span>
-                <%= owner and owner.name or "Other" %>
-              </a>
-            </li>
+              <% tab = (owner && "car#{owner.id}" || "empty-car") %>
+              <li class="<%= tab_active place, tab %>">
+                <a href="#<%=tab%>" data-toggle="tab">
+                  <span class="label label-info"><%= votes.size %></span>
+                  <%= owner and owner.name or "Other" %>
+                </a>
+              </li>
             <% end %>
           </ul>
         </li>
@@ -99,71 +99,3 @@
     </ul>
   </div>
 </div>
-
-<%#
-
-      <div class="span3">
-        <div class="tabbable tabs-below">
-          <div class="well">
-            <div class="btn-group pull-right">
-            <a class="btn btn-small">
-              <i class="icon-ok"></i>
-            </a>
-            </div>
-            <h3>Taqueria del Sol</h3>
-
-            <div class="tab-content">
-              <div class="tab-pane active" id="info2">
-                <p>Meatbowels! arst arst arst arst asrt arsta rst arst rst</p>
-                <dl class="dl-horizontal">
-                  <dt>Added by</dt>
-                  <dd>Burrito</dd>
-                  <dt>Leaving</dt>
-                  <dd>11:00</dd>
-                  <dt>Distance</dt>
-                  <dd>Driving</dd>
-                </dl>
-              </div>
-              <div class="tab-pane" id="people2">
-                <h4>2 seats left</h4>
-                <ul class="unstyled">
-                  <li><i class="icon-user"></i> Jessie</li>
-                  <li><a href="#" rel="tooltip" title="My comment"><i class="icon-comment"></i></a> Matt</li>
-                  <li><i class="icon-user"></i> Burrito</li>
-                </ul>
-              </div>
-              <div class="tab-pane" id="jz2">
-                <h4>4 seats left</h4>
-                <ul class="unstyled">
-                  <li><i class="icon-user"></i> JZ</li>
-                </ul>
-              </div>
-            </div>
-
-          </div>
-
-          <ul class="nav nav-tabs">
-            <li class="active"><a href="#info2" data-toggle="tab"><i class="icon-info-sign"></i></a></li>
-            <li class="dropdown">
-              <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                <i class="icon-road"></i> Drivers <b class="caret"></b>
-              </a>
-              <ul class="dropdown-menu">
-                <li>
-                  <a href="#people2" data-toggle="tab">
-                    <span class="label label-info">2</span> Jessie
-                  </a>
-                <li>
-                <li>
-                  <a href="#jz2" data-toggle="tab">
-                    <span class="label label-info">4</span> JZ
-                  </a>
-                </li>
-                <li class="divider"></li>
-                <li><a href="#another" data-toggle="tab">Other</a></li>
-              </ul>
-            </li>
-          </ul>
-        </div>
-      </div>
-%>
