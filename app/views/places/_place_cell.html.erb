@@ -45,7 +45,7 @@
         <% else %>
 
           <% place.car_owners.each do |owner, votes| %>
-            <% tab = "car#{owner.id}" %>
+            <% tab = (owner && "car#{owner.id}" || "empty-car") %>
             <div class="tab-pane<%= tab_active place, tab %>" id="<%=tab%>">
               <%= car_list owner, votes %>
             </div>
