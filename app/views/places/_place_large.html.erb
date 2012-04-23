@@ -71,8 +71,7 @@ desc = mine && 'Your Vote' || 'Most Popular Choice'
           <% if votes.include? @current_user.vote %>
             <%= link_to t('.unvote_html'), vote_path(place.vote_for(@current_user)), method: :delete, remote: true, class: 'btn btn-mini btn-danger' %>
           <% else %>
-            <%= link_to t(".vote_html"), votes_path(:place => place, :car => owner.try(:
-            car)), method: :post, remote: true, class: 'btn btn-mini btn-primary' %>
+            <%= link_to t(".vote_html"), votes_path(:place => place, :car => owner.try(:car)), method: :post, remote: true, class: 'btn btn-mini btn-primary' %>
           <% end %>
         </div>
         <% end %>
