@@ -12,7 +12,7 @@ class Person < ActiveRecord::Base
   
   validates :name, presence: true, uniqueness: true
   
-  before_validation { write_attribute :name, name.strip }
+  before_validation { write_attribute :name, name.try(:strip) }
   
   before_create :ensure_group
   
