@@ -45,14 +45,14 @@ ActiveRecord::Schema.define(:version => 20120420191724) do
   end
 
   create_table "places", :force => true do |t|
-    t.string    "name"
-    t.boolean   "walkable"
-    t.timestamp "created_at"
-    t.timestamp "updated_at"
-    t.integer   "person_id"
-    t.time      "leaving_at"
-    t.string    "notes"
-    t.integer   "votes_count"
+    t.string   "name"
+    t.boolean  "walkable"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "person_id"
+    t.time     "leaving_at"
+    t.string   "notes"
+    t.integer  "votes_count", :default => 0
   end
 
   create_table "votes", :force => true do |t|
