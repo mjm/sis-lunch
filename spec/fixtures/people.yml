@@ -1,0 +1,11 @@
+matt:
+  name: Matt
+  password_digest: whatever
+
+jessie:
+  name: Jessie
+  password_digest: who_cares
+
+burrito:
+  name: Burrito
+  password_digest: still don't care

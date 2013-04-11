@@ -1,0 +1,14 @@
+grubhub:
+  name: GrubHub
+  walkable: true
+  person: matt
+
+crazy_cuban:
+  name: Crazy Cuban
+  walkable: false
+  person: matt
+
+jimmy_johns:
+  name: Jimmy John's
+  walkable: true
+  person: jessie

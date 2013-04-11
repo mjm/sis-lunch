@@ -3,14 +3,14 @@ require 'rdiscount'
 PlaceCar = Struct.new(:owner, :votes)
 
 class Place < ActiveRecord::Base
-  validates :name, :presence => true, :uniqueness => true
+  validates :name, presence: true, uniqueness: true
 
   belongs_to :person
 
   has_many :votes, :dependent => :destroy
   has_many :people, :through => :votes
 
-  before_validation { write_attribute :name, name.strip }
+  before_validation { write_attribute :name, name.try(:strip) }
 
   class << self
     def most_popular
