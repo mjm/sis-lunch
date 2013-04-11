@@ -63,4 +63,34 @@ describe Place do
       @place.formatted_notes.strip.should == "<p>Here are <strong>some</strong> notes.</p>"
     end
   end
+
+  it "should find the vote for a given person" do
+    places(:grubhub).vote_for(people(:matt)).should == votes(:matt_for_gh)
+    places(:grubhub).vote_for(people(:jessie)).should == votes(:jessie_for_gh)
+    places(:jimmy_johns).vote_for(people(:burrito)).should == votes(:burrito_for_jj)
+
+    places(:grubhub).vote_for(people(:burrito)).should be_nil
+  end
+
+  context "car owners" do
+    before :each do
+      @place = places(:grubhub)
+    end
+
+    it "should contain a key for each car owner" do
+      @place.car_owners.should have_key(people(:matt))
+      @place.car_owners.should have_key(people(:jessie))
+      @place.car_owners.should_not have_key(people(:bowden))
+    end
+
+    it "should contain a nil key if a person is not assigned a car" do
+      @place.car_owners.should have_key(nil)
+    end
+
+    it "should not contain a nil key if everyone is assigned a car" do
+      @place.vote_for(people(:bowden)).car = cars(:jessies_car)
+
+      @place.car_owners.should_not have_key(nil)
+    end
+  end
 end

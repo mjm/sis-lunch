@@ -1,9 +1,15 @@
 matt_for_gh:
   person: matt
   place: grubhub
+  car: matts_car
 
 jessie_for_gh:
   person: jessie
+  place: grubhub
+  car: matts_car
+
+bowden_for_gh:
+  person: bowden
   place: grubhub
 
 burrito_for_jj:

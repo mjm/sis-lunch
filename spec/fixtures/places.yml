@@ -1,6 +1,6 @@
 grubhub:
   name: GrubHub
-  walkable: true
+  walkable: false
   person: matt
 
 crazy_cuban:

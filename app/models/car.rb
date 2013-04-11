@@ -1,10 +1,11 @@
 class Car < ActiveRecord::Base
   belongs_to :person
+  has_one :place, through: :person
   has_many :votes, :dependent => :nullify
   
   validates :seats, :inclusion => { :in => 1..10 }
 
-  def seats_left(place)
-    seats - place.votes_for_car(self).size
+  def seats_left
+    seats - votes.count
   end
 end

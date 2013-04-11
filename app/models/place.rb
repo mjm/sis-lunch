@@ -1,14 +1,12 @@
 require 'rdiscount'
 
-PlaceCar = Struct.new(:owner, :votes)
-
 class Place < ActiveRecord::Base
   validates :name, presence: true, uniqueness: true
 
   belongs_to :person
 
-  has_many :votes, :dependent => :destroy
-  has_many :people, :through => :votes
+  has_many :votes, dependent: :destroy
+  has_many :people, through: :votes
 
   before_validation { write_attribute :name, name.try(:strip) }
 
@@ -41,18 +39,6 @@ class Place < ActiveRecord::Base
 
     owners.delete(nil) if owners[nil].empty?
   	owners
-  end
-
-  def cars
-    cars = []
-    car_owners.each do |p, v|
-      cars << PlaceCar.new(p, v)
-    end
-    cars
-  end
-
-  def votes_for_car(car)
-    votes.select {|v| v.car == car }
   end
 
 end
