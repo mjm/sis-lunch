@@ -45,12 +45,18 @@ gem 'json'
 group :test do
   # Pretty printed test output
   gem 'turn', :require => false
+  gem 'faker'
+  gem 'capybara'
+  gem 'guard-rspec'
+  gem 'rb-fsevent', '~> 0.9'
+  gem 'launchy'
 end
 
 group :development, :test do
   gem 'rspec-rails', '~> 2.4'
-  gem 'ZenTest', '~> 4.4.2'
-  gem 'autotest-rails', '~> 4.1.0'
+#  gem 'ZenTest', '~> 4.4.2'
+#  gem 'autotest-rails', '~> 4.1.0'
+  gem 'factory_girl_rails'
 
   gem 'sqlite3'
 end

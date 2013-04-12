@@ -54,7 +54,7 @@ desc = mine && 'Your Vote' || 'Most Popular Choice'
       <% end %>
 
       <% if place.people.include? @current_user %>
-        <%= link_to t('.unvote_html'), vote_path(place.vote_for(@current_user)), method: :delete, remote: true, class: 'btn btn-mini btn-danger' %>
+        <%= link_to t('.unvote_html'), vote_path(@current_user.vote), method: :delete, remote: true, class: 'btn btn-mini btn-danger' %>
       <% else %>
         <%= link_to t(".vote_html"), votes_path(:place => place), method: :post, remote: true, class: 'btn btn-mini btn-primary' %>
       <% end %>
@@ -69,7 +69,7 @@ desc = mine && 'Your Vote' || 'Most Popular Choice'
         <div class="span3">
           <%= car_list owner, votes %>
           <% if votes.include? @current_user.vote %>
-            <%= link_to t('.unvote_html'), vote_path(place.vote_for(@current_user)), method: :delete, remote: true, class: 'btn btn-mini btn-danger' %>
+            <%= link_to t('.unvote_html'), vote_path(@current_user.vote), method: :delete, remote: true, class: 'btn btn-mini btn-danger' %>
           <% else %>
             <%= link_to t(".vote_html"), votes_path(:place => place, :car => owner.try(:car)), method: :post, remote: true, class: 'btn btn-mini btn-primary' %>
           <% end %>

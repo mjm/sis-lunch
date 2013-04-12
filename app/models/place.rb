@@ -1,5 +1,7 @@
 require 'rdiscount'
 
+PlaceCar = Struct.new(:owner, :votes)
+
 class Place < ActiveRecord::Base
   validates :name, presence: true, uniqueness: true
 
@@ -20,10 +22,6 @@ class Place < ActiveRecord::Base
     notes and Markdown.new(notes).to_html.html_safe or ""
   end
 
-  def vote_for(person)
-    votes.detect {|v| v.person == person }
-  end
-
   def car_owners
     owners = {}
     people.select(&:has_car?).each do |person|
@@ -39,6 +37,15 @@ class Place < ActiveRecord::Base
 
     owners.delete(nil) if owners[nil].empty?
   	owners
+  end
+
+  # This is used for the JSON API
+  def cars
+    cars = []
+    car_owners.each do |p, v|
+      cars << PlaceCar.new(p, v)
+    end
+    cars
   end
 
 end

@@ -2,67 +2,59 @@ require 'spec_helper'
 
 describe Person do
   before :each do
+
     @person = Person.new name: 'Some name', password: 'pass', password_confirmation: 'pass'
   end
 
   context "validating name" do
     it "should accept a unique name" do
-      @person.save.should be_true
+      build(:person).should be_valid
     end
 
     it "should reject a nil name" do
-      @person.name = nil
-      @person.save.should be_false
+      build(:person, name: nil).should_not be_valid
     end
 
     it "should reject a blank name" do
-      @person.name = ""
-      @person.save.should be_false
+      build(:person, name: "").should_not be_valid
     end
 
     it "should reject a name with only spaces" do
-      @person.name = "   "
-      @person.save.should be_false
+      build(:person, name: "     ").should_not be_valid
     end
 
     it "should reject a name that already exists" do
-      @person.save!
+      person = create(:person)
 
-      @person = Person.new name: 'Some name', password: 'things', password_confirmation: 'things'
-      @person.save.should be_false
+      build(:person, name: person.name).should_not be_valid
     end
 
     it "should reject a name that exists differing only by spaces" do
-      @person.save!
-
-      @person = Person.new name: '  Some name   ', password: 'things', password_confirmation: 'things'
-      @person.save.should be_false
+      person = create(:person)
+      build(:person, name: "  #{person.name}   ").should_not be_valid
     end
 
     it "should strip spaces on save" do
-      @person.name = "  Something  "
-      @person.save!
-
-      @person.reload.name.should eq("Something")
+      person = create(:person, :with_spaces)
+      person.reload.name.should == person.name.strip
     end
   end
 
   context "group" do
     before :each do
-      @group = Group.create! name: 'A group'
+      @group = create(:group)
     end
 
     it "should be assigned on create if not given one" do
-      @person.save!
-
-      @person.reload.group.should_not be_nil
+      create(:person).reload.group.should == @group
     end
 
     it "should be left alone on create if already set" do
-      @person.group = @group
-      @person.save!
+      person = build(:person, :with_group)
+      group = person.group
 
-      @person.reload.group.should eq(@group)
+      person.save!
+      person.reload.group.should eq(group)
     end
   end
 

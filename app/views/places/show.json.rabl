@@ -3,7 +3,11 @@ object @place
 attributes :id, :name, :notes, :walkable
 
 node :user_vote_id do |p|
-  p.vote_for(@current_user).try(:id)
+  if p.people.include? @current_user
+    @current_user.vote.id
+  else
+    nil
+  end
 end
 
 if @place.walkable?

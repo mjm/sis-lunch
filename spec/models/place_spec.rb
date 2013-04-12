@@ -1,86 +1,76 @@
 require 'spec_helper'
 
 describe Place do
-  fixtures :all
-
-  before :each do
-    @place = Place.new name: 'Some place', person: people(:matt)
-  end
-
   context "validating name" do
     it "should accept a unique name" do
-      @place.save.should be_true
+      build(:place).should be_valid
     end
 
     it "should reject a nil name" do
-      @place.name = nil
-      @place.save.should be_false
+      build(:place, name: nil).should_not be_valid
     end
 
     it "should reject a blank name" do
-      @place.name = ""
-      @place.save.should be_false
+      build(:place, name: "").should_not be_valid
     end
 
     it "should reject a name with only spaces" do
-      @place.name = "   "
-      @place.save.should be_false
+      build(:place, name: "    ").should_not be_valid
     end
 
     it "should reject a name that already exists" do
-      @place.save!
+      place = create(:place)
 
-      @place = Place.new name: 'Some place', person: people(:matt)
-      @place.save.should be_false
+      build(:place, name: place.name).should_not be_valid
     end
 
     it "should reject a name that exists differing only by spaces" do
-      @place.save!
+      place = create(:place)
 
-      @place = Place.new name: '  Some place   ', person: people(:matt)
-      @place.save.should be_false
+      build(:place, name: "   #{place.name}   ").should_not be_valid
     end
 
     it "should strip spaces on save" do
-      @place.name = "  Something  "
-      @place.save!
-
-      @place.reload.name.should == "Something"
+      place = create(:place, :with_spaces)
+      place.reload.name.should == place.name.strip
     end
   end
 
   it "should choose most popular place by vote count" do
-    Place.most_popular.should == places(:grubhub)
+    create(:place, votes_count: 2)
+    create(:place, votes_count: 5)
+    create(:place, votes_count: 1)
+
+    Place.most_popular.votes_count.should == 5
   end
 
   context "formatted notes" do
     it "should be empty if no notes are set" do
-      @place.formatted_notes.should == ""
+      build(:place, notes: nil).formatted_notes.should == ""
     end
 
     it "should be HTML if some notes are set" do
-      @place.notes = "Here are **some** notes."
-      @place.formatted_notes.strip.should == "<p>Here are <strong>some</strong> notes.</p>"
+      build(:place, notes: "Here are **some** notes.").formatted_notes.strip.should == "<p>Here are <strong>some</strong> notes.</p>"
     end
-  end
-
-  it "should find the vote for a given person" do
-    places(:grubhub).vote_for(people(:matt)).should == votes(:matt_for_gh)
-    places(:grubhub).vote_for(people(:jessie)).should == votes(:jessie_for_gh)
-    places(:jimmy_johns).vote_for(people(:burrito)).should == votes(:burrito_for_jj)
-
-    places(:grubhub).vote_for(people(:burrito)).should be_nil
   end
 
   context "car owners" do
     before :each do
-      @place = places(:grubhub)
+      @place = create(:place)
+
+      @person1 = create(:person, :with_car, place: @place)
+      @person2 = create(:person, :with_car, place: @place)
+      @person3 = create(:person, place: @place)
+
+      @person1.car.update_attribute(:seats, 2)
+      @person1.vote.update_attribute(:car, @person1.car)
+      @person2.vote.update_attribute(:car, @person1.car)
     end
 
     it "should contain a key for each car owner" do
-      @place.car_owners.should have_key(people(:matt))
-      @place.car_owners.should have_key(people(:jessie))
-      @place.car_owners.should_not have_key(people(:bowden))
+      @place.car_owners.should have_key(@person1)
+      @place.car_owners.should have_key(@person2)
+      @place.car_owners.should_not have_key(@person3)
     end
 
     it "should contain a nil key if a person is not assigned a car" do
@@ -88,8 +78,7 @@ describe Place do
     end
 
     it "should not contain a nil key if everyone is assigned a car" do
-      @place.vote_for(people(:bowden)).car = cars(:jessies_car)
-
+      @person3.vote.update_attribute :car, @person2.car
       @place.car_owners.should_not have_key(nil)
     end
   end

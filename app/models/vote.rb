@@ -3,7 +3,7 @@ class SeatCountValidator < ActiveModel::EachValidator
     # don't care if we were already in the car
     return if value and value.votes.include?(record)
 
-    if value and value.seats_left(record.place) < 1
+    if value and value.seats_left < 1
       record.errors.add attribute, "has no more seats available." #TODO i18n
     end
   end
@@ -14,8 +14,8 @@ class Vote < ActiveRecord::Base
   belongs_to :person
   belongs_to :car
 
-  validates :person_id, :uniqueness => true # TODO be able to store history
-  validates :car, :seat_count => true
+  validates :person_id, uniqueness: true # TODO be able to store history
+  validates :car, seat_count: true
 
   before_create :assign_car_owner
 
