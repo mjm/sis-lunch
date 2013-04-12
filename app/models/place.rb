@@ -4,6 +4,7 @@ PlaceCar = Struct.new(:owner, :votes)
 
 class Place < ActiveRecord::Base
   validates :name, presence: true, uniqueness: true
+  validates :person, presence: true
 
   belongs_to :person
 

@@ -1,6 +1,10 @@
 require 'spec_helper'
 
 describe Place do
+  it "should not be valid without a person" do
+    build(:place, person: nil).should_not be_valid
+  end
+
   context "validating name" do
     it "should accept a unique name" do
       build(:place).should be_valid

@@ -14,7 +14,8 @@ class Vote < ActiveRecord::Base
   belongs_to :person
   belongs_to :car
 
-  validates :person_id, uniqueness: true # TODO be able to store history
+  validates :person_id, presence: true, uniqueness: true # TODO be able to store history
+  validates :place, presence: true
   validates :car, seat_count: true
 
   before_create :assign_car_owner

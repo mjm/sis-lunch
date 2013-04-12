@@ -1,6 +1,10 @@
 require 'spec_helper'
 
 describe Car do
+  it "should not allow a car with no person" do
+    build(:car).should_not be_valid
+  end
+
   context "validating seats" do
     it "should allow a car with a valid number of seats" do
       build(:car, :with_person).should be_valid
@@ -16,6 +20,10 @@ describe Car do
 
     it "should not allow a car with too many seats" do
       build(:car, :with_person, seats: 11).should_not be_valid
+    end
+
+    it "should not allow a car with nil seats" do
+      build(:car, :with_person, seats: nil).should_not be_valid
     end
   end
 

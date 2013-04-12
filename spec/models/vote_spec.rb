@@ -1,6 +1,14 @@
 require 'spec_helper'
 
 describe Vote do
+  it "should not be valid without a place" do
+    build(:vote, place: nil).should_not be_valid
+  end
+
+  it "should not be valid without a person" do
+    build(:vote, person: nil).should_not be_valid
+  end
+
   context "car" do
     it "should be filled in with the person's car if they have one" do
       person = create(:person, :with_car)

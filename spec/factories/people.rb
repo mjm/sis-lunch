@@ -7,9 +7,13 @@ FactoryGirl.define do
     p.password_confirmation "who_cares"
     p.has_car false
 
-    trait :with_car do |p|
-      p.has_car true
-      p.car
+    trait :with_car do
+      has_car true
+
+      # THIS IS DUMB
+      association :car, strategy: :build
+      after(:build) {|person| person.car.person = person}
+      after(:create) {|person| person.car.save!}
     end
 
     trait :with_spaces do |p|
