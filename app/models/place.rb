@@ -15,7 +15,7 @@ class Place < ActiveRecord::Base
 
   class << self
     def most_popular
-      self.order('votes_count desc').first
+      self.where('votes_count > 0').order('votes_count desc').first
     end
   end
 

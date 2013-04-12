@@ -40,12 +40,23 @@ describe Place do
     end
   end
 
-  it "should choose most popular place by vote count" do
-    create(:place, votes_count: 2)
-    create(:place, votes_count: 5)
-    create(:place, votes_count: 1)
+  describe "most popular" do
+    it "should choose most popular place by vote count" do
+      create(:place, votes_count: 2)
+      create(:place, votes_count: 5)
+      create(:place, votes_count: 1)
 
-    Place.most_popular.votes_count.should == 5
+      Place.most_popular.votes_count.should == 5
+    end
+
+    it "should choose no place when there are no places" do
+      Place.most_popular.should be_nil
+    end
+
+    it "should choose no place when there are places but no votes" do
+      create_list(:place, 3)
+      Place.most_popular.should be_nil
+    end
   end
 
   context "formatted notes" do
