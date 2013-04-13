@@ -13,6 +13,8 @@ class Place < ActiveRecord::Base
 
   before_validation { write_attribute :name, name.try(:strip) }
 
+  attr_protected :person_id
+
   class << self
     def most_popular
       self.where('votes_count > 0').order('votes_count desc').first

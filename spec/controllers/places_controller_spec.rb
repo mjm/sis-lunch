@@ -159,6 +159,131 @@ describe PlacesController do
         end
       end
     end
+
+    describe "POST #create" do
+      context "when the place is valid" do
+        before :each do
+          @place = attributes_for(:place)
+          as_user :post, :create, place: @place, format: 'js'
+        end
+
+        it "should render the create JS view" do
+          response.should render_template('create')
+        end
+
+        it "should create the place" do
+          Place.find_by_name(@place[:name]).should_not be_nil
+        end
+
+        it "should assign the place to the current user" do
+          Place.find_by_name(@place[:name]).person.should == @user
+        end
+      end
+
+      context "when the place is invalid" do
+        before :each do
+          @place = attributes_for(:place, name: nil)
+          as_user :post, :create, place: @place, format: 'js'
+        end
+
+        it "should render the create JS view" do
+          response.should render_template('create')
+        end
+
+        it "should not create the place" do
+          Place.find_by_name(@place[:name]).should be_nil
+        end
+      end
+    end
+
+    describe "GET #edit" do
+      before :each do
+        @place = create(:place, person: @user)
+      end
+
+      it "should render the edit view" do
+        as_user :get, :edit, id: @place.id, format: 'js'
+        response.should render_template('edit')
+      end
+
+      it "should 404 if the place ID does not exist" do
+        -> { as_user :get, :edit, id: @place.id + 1, format: 'js' }.should raise_error(ActiveRecord::RecordNotFound)
+      end
+
+      it "should 404 if the place is not in the current user's group" do
+        place = create(:place, person: create(:person, group: @user.group))
+        -> { as_user :get, :edit, id: place.id, format: 'js' }.should raise_error(ActiveRecord::RecordNotFound)
+      end
+    end
+
+    describe "PUT #update" do
+      before :each do
+        @place = create(:place, person: @user)
+      end
+
+      it "should not allow changing the owner of the place" do
+        person = create(:person, group: @user.group)
+        as_user :put, :update, id: @place.id, place: {person_id: person.id}, format: 'js'
+        @place.reload.person.should == @user
+      end
+
+      context "when the place is valid" do
+        before :each do
+          as_user :put, :update, id: @place.id, place: {name: 'Some Name'}, format: 'js'
+        end
+
+        it "should render the update JS view" do
+          response.should render_template('update')
+        end
+
+        it "should set the changed attributes on the place" do
+          @place.reload.name.should == 'Some Name'
+        end
+      end
+
+      context "when the place is invalid" do
+        before :each do
+          as_user :put, :update, id: @place.id, place: {name: nil}, format: 'js'
+        end
+
+        it "should render the update JS view" do
+          response.should render_template('update')
+        end
+
+        it "should not set the changed attributes on the place" do
+          @place.reload.name.should_not be_blank
+        end
+      end
+    end
+
+    describe "DELETE #destroy" do
+      before :each do
+        @place = create(:place, person: @user)
+      end
+
+      context "when the place belongs to the current user" do
+        before :each do
+          as_user :delete, :destroy, id: @place.id, format: 'js'
+        end
+
+        it "should render the destroy JS view" do
+          response.should render_template('destroy')
+        end
+
+        it "should destroy the place" do
+          Place.find_by_id(@place.id).should be_nil
+        end
+      end
+
+      it "should 404 if the place does not exist" do
+        -> { as_user :delete, :destroy, id: @place.id + 1, format: 'js' }.should raise_error(ActiveRecord::RecordNotFound)
+      end
+
+      it "should 404 if the place belongs to a different user" do
+        place = create(:place, person: create(:person, group: @user.group))
+        -> { as_user :delete, :destroy, id: place.id, format: 'js' }.should raise_error(ActiveRecord::RecordNotFound)
+      end
+    end
   end
 
   context "with no logged-in user" do
