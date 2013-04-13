@@ -2,7 +2,7 @@ require 'faker'
 
 FactoryGirl.define do
   factory :place do
-    name { Faker::Company.name }
+    sequence(:name) {|n| "#{Faker::Company.name}#{n}" }
     walkable true
     person
 
