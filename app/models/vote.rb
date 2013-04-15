@@ -18,6 +18,14 @@ class Vote < ActiveRecord::Base
   validates :place, presence: true
   validates :car, seat_count: true
 
+  validates_each :person do |record, attribute, value|
+    next if value.nil? or record.place.nil?
+
+    if value.group != record.place.person.group
+      record.errors.add attribute, "must be in the same group as the place voted for."
+    end
+  end
+
   before_create :assign_car_owner
 
   private

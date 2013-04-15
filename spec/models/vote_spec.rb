@@ -31,6 +31,12 @@ describe Vote do
     build(:vote, person: vote.person).should_not be_valid
   end
 
+  it "should not allow a person to vote for a place in a different group" do
+    person = create(:person, :with_group)
+    place = create(:place, person: create(:person, :with_group))
+    build(:vote, person: person, place: place).should_not be_valid
+  end
+
   it "should update the vote count in the associated place" do
     place = create(:place)
     place.votes_count.should == 0

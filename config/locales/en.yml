@@ -12,8 +12,8 @@ en:
       heading: Sign up to vote
     edit:
       heading: Edit your profile
-  cars:
-    save:
+  car_options:
+    update:
       success: Your car settings have been saved.
   votes:
     vote:
@@ -70,6 +70,7 @@ en:
         heading: Lunch Options
         have_car: I have a car.
         seats_html: "My car has %{field} <span class='add-on'>seats</span> total."
+        submit: 'Save Changes'
   activerecord:
     errors:
       models:

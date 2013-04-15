@@ -1,10 +1,7 @@
 Lunch::Application.routes.draw do
-  resources :cars
-
+  resource :car_options
   resources :votes
-
   resources :people
-
   resources :places
   match 'periodic' => 'places#periodic'
   

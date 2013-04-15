@@ -48,17 +48,19 @@ group :test do
   gem 'faker'
   gem 'capybara'
   gem 'guard-rspec'
-  gem 'rb-fsevent', '~> 0.9'
   gem 'launchy'
 end
 
 group :development, :test do
   gem 'rspec-rails', '~> 2.4'
-#  gem 'ZenTest', '~> 4.4.2'
-#  gem 'autotest-rails', '~> 4.1.0'
   gem 'factory_girl_rails'
 
   gem 'sqlite3'
+
+  if RUBY_PLATFORM.downcase.include?("darwin")
+    gem 'rb-fsevent', '~> 0.9'
+    gem 'growl'
+  end
 end
 group :production do
   gem 'pg'
