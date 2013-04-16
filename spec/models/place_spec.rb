@@ -96,5 +96,18 @@ describe Place do
       @person3.vote.update_attribute :car, @person2.car
       @place.car_owners.should_not have_key(nil)
     end
+
+    it 'should produce an appropriate structure for JSON' do
+      cars = @place.cars
+      cars.size.should == 3
+
+      owners = cars.map {|c| c.owner }
+      owners.should include(@person1)
+      owners.should include(@person2)
+      owners.should include(nil)
+      owners.should_not include(@person3)
+
+      cars.detect {|c| c.owner == @person1 }.votes.size.should == 2
+    end
   end
 end
