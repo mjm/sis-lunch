@@ -77,4 +77,60 @@ describe Vote do
       end
     end
   end
+
+  describe "update comment" do
+    before :each do
+      @person = create(:person, :with_group)
+      @vote = create(:vote, person: @person)
+    end
+
+    it 'should raise an error if the vote does not exist' do
+      -> {
+        Vote.update_comment(@vote.id+1, @person, 'Some comment.')
+      }.should raise_error(ActiveRecord::RecordNotFound)
+    end
+
+    it 'should raise an error if the vote does not belong to the person' do
+      vote = create(:vote)
+      -> {
+        Vote.update_comment(vote.id, @person, 'Some comment.')
+      }.should raise_error(ActiveRecord::RecordNotFound)
+    end
+
+    context "with valid input" do
+      it 'should return the updated vote' do
+        Vote.update_comment(@vote.id, @person, 'Some comment').should == @vote
+      end
+
+      it 'should update the comment on the vote' do
+        Vote.update_comment(@vote.id, @person, 'Some comment')
+        @vote.reload.comment.should == 'Some comment'
+      end
+    end
+  end
+
+  describe "register" do
+    before :each do
+      @person = create(:person, :with_group)
+      @vote = create(:vote, person: @person)
+      @place = create(:place, person: create(:person, :with_car))
+    end
+
+    it 'should destroy the previous vote' do
+      Vote.register(@person, @place.id, nil)
+      -> { Vote.find(@vote.id) }.should raise_error(ActiveRecord::RecordNotFound)
+    end
+
+    it 'should create a new vote' do
+      vote = Vote.register(@person, @place.id, nil)
+      vote.should_not be_nil
+      @person.reload.vote.should == vote
+    end
+
+    it 'should create a new vote with a car if one is given' do
+      create(:vote, person: @place.person, place: @place)
+      Vote.register(@person, @place.id, @place.person.car.id)
+      @person.reload.vote.car.should == @place.person.car
+    end
+  end
 end

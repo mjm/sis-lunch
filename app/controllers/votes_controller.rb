@@ -1,34 +1,29 @@
+# This would make more sense right now as a single resource, since a
+# person only has a single vote at the moment. Groups may change that
+# dynamic.
+
 class VotesController < ApplicationController
   respond_to :js, :json
   before_filter :login_required
 
   def create
-    Vote.destroy_all(person_id: @current_user.id)
-    @vote = Vote.new person: @current_user
-    @vote.place_id = params[:place]
-    @vote.car_id = params[:car]
-    @vote.save
-
+    @vote = Vote.register(@current_user, params[:place], params[:car])
     respond_with(@vote)
   end
 
   def edit
-    @vote = Vote.first(conditions: {id: params[:id], person_id: @current_user.id})
-    raise ActiveRecord::RecordNotFound, 'could not find vote' if @vote.nil?
+    @vote = @current_user.vote
+    raise ActiveRecord::RecordNotFound, 'could not find vote' unless @vote.id == params[:id].to_i
   end
 
   def update
-    @vote = Vote.first(conditions: {id: params[:id], person_id: @current_user.id})
-    raise ActiveRecord::RecordNotFound, 'could not find vote' if @vote.nil?
-    @vote.comment = params[:vote][:comment]
-    @vote.save
-
+    @vote = Vote.update_comment(params[:id], @current_user, params[:vote][:comment])
     respond_with(@vote)
   end
 
   def destroy
-    @vote = Vote.first(conditions: {id: params[:id], person_id: @current_user.id})
-    raise ActiveRecord::RecordNotFound, 'could not find vote' if @vote.nil?
+    @vote = @current_user.vote
+    raise ActiveRecord::RecordNotFound, 'could not find vote' unless @vote.id == params[:id].to_i
     @vote.destroy
 
     respond_with(@vote)
