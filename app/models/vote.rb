@@ -28,27 +28,25 @@ class Vote < ActiveRecord::Base
 
   before_create :assign_car_owner
 
-  class << self
-    def update_comment(id, person, comment)
-      vote = first(conditions: {id: id, person_id: person.id})
-      raise ActiveRecord::RecordNotFound, 'could not find vote' unless vote
+  def self.update_comment(id, person, comment)
+    vote = first(conditions: {id: id, person_id: person.id})
+    raise ActiveRecord::RecordNotFound, 'could not find vote' unless vote
 
-      vote.comment = comment
-      vote.save
+    vote.comment = comment
+    vote.save
 
-      vote
-    end
+    vote
+  end
 
-    def register(person, place_id, car_id)
-      destroy_all person_id: person.id
+  def self.register(person, place_id, car_id)
+    destroy_all person_id: person.id
 
-      vote = new(person: person)
-      vote.place_id = place_id
-      vote.car_id = car_id
-      vote.save
+    vote = new(person: person)
+    vote.place_id = place_id
+    vote.car_id = car_id
+    vote.save
 
-      vote
-    end
+    vote
   end
 
   private

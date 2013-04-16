@@ -4,5 +4,5 @@ class Group < ActiveRecord::Base
   has_many :people, through: :memberships
   
   # Group places are all the places created by people in the group
-  has_many :places, through: :people, source: :places 
+  has_many :places, through: :people, source: :places
 end

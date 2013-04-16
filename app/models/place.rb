@@ -15,10 +15,8 @@ class Place < ActiveRecord::Base
 
   attr_protected :person_id
 
-  class << self
-    def most_popular
-      self.where('votes_count > 0').order('votes_count desc').first
-    end
+  def self.most_popular
+    self.where('votes_count > 0').order('votes_count desc').first
   end
 
   def formatted_notes
