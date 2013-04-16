@@ -56,6 +56,7 @@ group :development, :test do
   gem 'factory_girl_rails'
 
   gem 'sqlite3'
+  gem 'simplecov'
 
   if RUBY_PLATFORM.downcase.include?("darwin")
     gem 'rb-fsevent', '~> 0.9'
