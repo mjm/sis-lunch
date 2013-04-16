@@ -16,12 +16,11 @@ class PlacesController < ApplicationController
 
   def periodic
     load_places_data
-
-    render :partial => 'places'
+    render partial: 'places'
   end
 
   def create
-    @place = Place.create(params[:place].merge(:person => @current_user))
+    @place = @current_user.places.create(params[:place])
     respond_with(@place)
   end
 
@@ -41,5 +40,16 @@ class PlacesController < ApplicationController
 
     respond_with(@place)
   end
+
+  private
+    def load_places_data
+      @places = @current_user.visible_places.to_a
+
+      @my_place = @current_user.place
+      @their_place = @current_user.group.places.most_popular
+
+      @places.delete(@my_place)
+      @places.delete(@their_place)
+    end
 
 end

@@ -10,7 +10,9 @@ FactoryGirl.define do
     ignore { votes_count 0 }
 
     after :create do |place, ev|
-      FactoryGirl.create_list(:vote, ev.votes_count, place: place)
+      ev.votes_count.times do |i|
+        FactoryGirl.create(:vote, place: place, person: FactoryGirl.create(:person, group: place.person.group))
+      end
     end
 
     trait :with_spaces do

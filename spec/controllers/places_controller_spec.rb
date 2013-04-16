@@ -52,6 +52,18 @@ describe PlacesController do
           as_user :get, :index
           assigns(:places).should_not include(Place.most_popular)
         end
+
+        it 'should not include any places from other groups' do
+          create(:place, person: @user, votes_count: 5)
+
+          place = create(:place, person: create(:person, :with_group))
+          as_user :get, :index
+          assigns(:places).should_not include(place)
+
+          place = create(:place, person: create(:person, :with_group), votes_count: 10)
+          as_user :get, :index
+          assigns(:their_place).should_not == place
+        end
       end
 
       context "when no places exist" do

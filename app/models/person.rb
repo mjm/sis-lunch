@@ -9,6 +9,7 @@ class Person < ActiveRecord::Base
   has_one :group, through: :membership
   
   has_many :places
+  has_many :visible_places, through: :group, source: :places, order: 'votes_count desc'
   
   validates :name, presence: true, uniqueness: true
   

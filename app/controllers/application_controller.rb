@@ -21,15 +21,4 @@ class ApplicationController < ActionController::Base
       request.subdomains.first == 'm'
     end
     helper_method :mobile_request?
-
-  protected
-    def load_places_data
-      @places = @current_user.group.places.order('votes_count desc').to_a
-
-      @my_place = @current_user.place
-      @their_place = Place.most_popular
-
-      @places.delete(@my_place)
-      @places.delete(@their_place)
-    end
 end
