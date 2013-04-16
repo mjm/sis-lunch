@@ -6,13 +6,6 @@ describe PlacesController do
       @user = create(:person, :with_group)
     end
 
-    def as_user(method, action, params = nil, session = nil, flash = nil)
-      session ||= {}
-      session = session.merge({user_id: @user.id})
-
-      send(method, action, params, session, flash)
-    end
-
     describe "GET #index" do
       it "should render the index view" do
         as_user :get, :index
@@ -287,11 +280,6 @@ describe PlacesController do
   end
 
   context "with no logged-in user" do
-    def should_redirect_to_login(method, *args)
-      send(method, *args)
-      response.should redirect_to login_url
-    end
-
     it "should redirect to the login page with any action" do
       should_redirect_to_login :get, :index
       should_redirect_to_login :get, :show, id: 1

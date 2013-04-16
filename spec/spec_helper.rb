@@ -9,6 +9,20 @@ require 'capybara/rspec'
 # in spec/support/ and its subdirectories.
 Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
 
+module ControllerHelper
+  def as_user(method, action, params = nil, session = nil, flash = nil)
+    session ||= {}
+    session = session.merge({user_id: @user.id})
+
+    send(method, action, params, session, flash)
+  end
+
+  def should_redirect_to_login(method, *args)
+    send(method, *args)
+    response.should redirect_to login_url
+  end
+end
+
 RSpec.configure do |config|
   # ## Mock Framework
   #
@@ -38,4 +52,5 @@ RSpec.configure do |config|
   config.order = "random"
 
   config.include FactoryGirl::Syntax::Methods
+  config.include ControllerHelper
 end

@@ -6,12 +6,7 @@ describe CarOptionsController do
       @user = create(:person, :with_group)
     end
 
-    def update(params = nil, session = nil, flash = nil)
-      session ||= {}
-      session = session.merge({user_id: @user.id})
-
-      put :update, params, session, flash
-    end
+    def update(*args) as_user :put, :update, *args; end
 
     describe "PUT #update" do
       context "when the user does not already have a car" do
@@ -119,11 +114,6 @@ describe CarOptionsController do
   end
 
   context "with no logged-in user" do
-    def should_redirect_to_login(method, *args)
-      send(method, *args)
-      response.should redirect_to login_url
-    end
-
     it "should redirect to the login page with any action" do
       should_redirect_to_login :put, :update
     end

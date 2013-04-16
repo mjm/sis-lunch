@@ -9,13 +9,6 @@ describe VotesController do
       @car = @place.person.car
     end
 
-    def as_user(method, action, params = nil, session = nil, flash = nil)
-      session ||= {}
-      session = session.merge({user_id: @user.id})
-
-      send(method, action, params, session, flash)
-    end
-
     describe "POST #create" do
       context "when the vote is valid" do
         before :each do
@@ -147,11 +140,6 @@ describe VotesController do
   end
 
   context "with no logged-in user" do
-    def should_redirect_to_login(method, *args)
-      send(method, *args)
-      response.should redirect_to login_url
-    end
-
     it "should redirect to the login page with any action" do
       should_redirect_to_login :post, :create
       should_redirect_to_login :get, :edit, id: 1
