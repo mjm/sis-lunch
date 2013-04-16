@@ -1,11 +1,6 @@
 require 'spec_helper'
 
 describe Person do
-  before :each do
-
-    @person = Person.new name: 'Some name', password: 'pass', password_confirmation: 'pass'
-  end
-
   context "validating name" do
     it "should accept a unique name" do
       build(:person).should be_valid
@@ -55,6 +50,68 @@ describe Person do
 
       person.save!
       person.reload.group.should eq(group)
+    end
+  end
+
+  describe "car options" do
+    context "when the person does not have a car" do
+      before :each do
+        @person = create(:person, :with_group)
+      end
+
+      it "should be able to set the car option to false" do
+        @person.update_car_options(has_car: false, seats: 5)
+        @person.reload.should_not have_car
+        @person.car.should be_nil
+      end
+
+      it "should be able to set the car option to true" do
+        @person.update_car_options(has_car: true, seats: 5)
+        @person.reload.should have_car
+        @person.car.should_not be_nil
+        @person.car.seats.should == 5
+      end
+    end
+
+    context "when the person already has a car" do
+      before :each do
+        @person = create(:person, :with_car, :with_group)
+        @seats = @person.car.seats
+        @new_seats = (@seats % 10) + 1
+      end
+
+      it "should be able to set the car option to true" do
+        @person.update_car_options(has_car: true, seats: @new_seats)
+        @person.reload.should have_car
+        @person.car.should_not be_nil
+        @person.car.seats.should == @new_seats
+      end
+
+      it "should be able to set the car option to false" do
+        @person.update_car_options(has_car: false, seats: @new_seats)
+        @person.reload.should_not have_car
+        @person.car.should_not be_nil
+        @person.car.seats.should == @seats
+      end
+    end
+
+    context "when the number of seats is not valid" do
+      it "should leave the car option as it was originally" do
+        person = create(:person, :with_group)
+        person.update_car_options(has_car: true, seats: -1)
+
+        person.reload.should_not have_car
+        person.car.should be_nil
+      end
+
+      it "should not update the number of seats in the car" do
+        person = create(:person, :with_car, :with_group)
+        person.update_car_options(has_car: true, seats: -1)
+
+        person.reload.should have_car
+        person.car.should_not be_nil
+        person.car.seats.should_not == -1
+      end
     end
   end
 

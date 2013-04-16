@@ -15,9 +15,21 @@ class Person < ActiveRecord::Base
   before_validation { write_attribute :name, name.try(:strip) }
   
   before_create :ensure_group
-  
-  def as_json(options = nil)
-    super((options or {}).merge(except: :password_digest))
+
+  def update_car_options(options = {})
+    self.has_car = options[:has_car]
+
+    if has_car
+      self.car ||= build_car
+      car.seats = options[:seats]
+      return false unless car.save
+
+      if has_car_changed? and vote and vote.car.nil?
+        vote.update_attribute :car, car
+      end
+    end
+
+    save
   end
   
   private
