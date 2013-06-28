@@ -14,41 +14,41 @@
 ActiveRecord::Schema.define(:version => 20120420191724) do
 
   create_table "cars", :force => true do |t|
-    t.integer   "person_id"
-    t.integer   "seats"
-    t.timestamp "created_at"
-    t.timestamp "updated_at"
+    t.integer  "person_id"
+    t.integer  "seats"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "groups", :force => true do |t|
-    t.string    "name"
-    t.integer   "created_by_id"
-    t.timestamp "created_at"
-    t.timestamp "updated_at"
+    t.string   "name"
+    t.integer  "created_by_id"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
   end
 
   create_table "memberships", :force => true do |t|
-    t.integer   "person_id"
-    t.integer   "group_id"
-    t.timestamp "created_at"
-    t.timestamp "updated_at"
+    t.integer  "person_id"
+    t.integer  "group_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "people", :force => true do |t|
-    t.string    "name"
-    t.timestamp "created_at"
-    t.timestamp "updated_at"
-    t.boolean   "has_car"
-    t.string    "signup_ip"
-    t.string    "login_ip"
-    t.string    "password_digest"
+    t.string   "name"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+    t.boolean  "has_car"
+    t.string   "signup_ip"
+    t.string   "login_ip"
+    t.string   "password_digest"
   end
 
   create_table "places", :force => true do |t|
     t.string   "name"
     t.boolean  "walkable"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                 :null => false
+    t.datetime "updated_at",                 :null => false
     t.integer  "person_id"
     t.time     "leaving_at"
     t.string   "notes"
@@ -56,12 +56,12 @@ ActiveRecord::Schema.define(:version => 20120420191724) do
   end
 
   create_table "votes", :force => true do |t|
-    t.integer   "place_id"
-    t.integer   "person_id"
-    t.timestamp "created_at"
-    t.timestamp "updated_at"
-    t.integer   "car_id"
-    t.string    "comment"
+    t.integer  "place_id"
+    t.integer  "person_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+    t.integer  "car_id"
+    t.string   "comment"
   end
 
 end
