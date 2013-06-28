@@ -1,9 +1,9 @@
 language: ruby
 rvm:
-  - 1.9.2
+  - 1.9.3
   - 2.0.0
   - rbx-19mode
   - jruby-19mode
 script:
-  - bundle exec rake db:test:prepare
+  - bundle exec rake db:migrate db:test:prepare
   - bundle exec rake
