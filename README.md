@@ -1,0 +1,1 @@
+[![Build Status](https://travis-ci.org/mjm/sis-lunch.png?branch=master)](https://travis-ci.org/mjm/sis-lunch)
