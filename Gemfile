@@ -58,10 +58,10 @@ group :development, :test do
   gem 'sqlite3'
   gem 'simplecov'
 
-  if RUBY_PLATFORM.downcase.include?("darwin")
-    gem 'rb-fsevent', '~> 0.9'
-    gem 'growl'
-  end
+  # if RUBY_PLATFORM.downcase.include?("darwin")
+  #   gem 'rb-fsevent', '~> 0.9'
+  #   gem 'growl'
+  # end
 end
 group :production do
   gem 'pg'
